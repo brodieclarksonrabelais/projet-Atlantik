@@ -149,6 +149,12 @@
     <Compile Include="FormAjoutSecteur.Designer.cs">
       <DependentUpon>FormAjoutSecteur.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAjoutTarif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAjoutTarif.Designer.cs">
+      <DependentUpon>FormAjoutTarif.cs</DependentUpon>
+    </Compile>
     <Compile Include="Liaison.cs" />
     <Compile Include="Ports.cs" />
     <Compile Include="Program.cs" />

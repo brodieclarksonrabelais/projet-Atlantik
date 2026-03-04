@@ -22,60 +22,37 @@ namespace projetAtlantik_Brodie
 
         private void btnAjoutLiaison_Click(object sender, EventArgs e)
         {
-            MySqlConnection maCo;
-            maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
-            string requête;
-            MySqlCommand maCde;
+            MySqlConnection maCnx4;
+            maCnx4 = new MySqlConnection("server=localhost;user=root;database=ATLANTIK;port=3306;password=");
 
             try
             {
-                maCo.Open();
-                Int32 n;
-                
-                // /////////// AFFECTATION D'UN SECTEUR 
-                string secteurLu = lbxSecteurs.Text;
-                do
-                {
-                    Console.WriteLine("Auteur (Nom, Prénom) ?");
-                    secteurLu = Console.ReadLine();
-                    requête = "select count(*) FROM secteur WHERE secteur=@secteur";
-                    maCde = new MySqlCommand(requête, maCo);
-                    maCde.Parameters.AddWithValue("@secteur", secteurLu);
-                    n = Convert.ToInt32(maCde.ExecuteScalar());
-                    if (n == 0)
-                    {
-                        Console.WriteLine("Pas d'auteur avec ce nom.");
-                    }
-                }
-                while (n != 1);
-                requête = "select nosecteur FROM secteur WHERE secteur=@secteur";
+                double distance = double.Parse(tbxDistance.Text);
+                string requete;
+                maCnx4.Open();
+                requete = "insert into liaison(NOPORT_DEPART,NOSECTEUR, NOPORT_ARRIVEE,DISTANCE) values(@noportdepart,@nosecteur,@noportarrivee,@distance)";
+                var maCde4 = new MySqlCommand(requete, maCnx4);
+                maCde4.Parameters.AddWithValue("@noportdepart", ((Secteurs)lbxSecteurs.SelectedItem).GetNosecteur());
+                maCde4.Parameters.AddWithValue("@nosecteur", ((Ports)cmbDepart.SelectedItem).GetNoPorts());
+                maCde4.Parameters.AddWithValue("@noportarrivee", ((Ports)cmbArrivee.SelectedItem).GetNoPorts());
+                maCde4.Parameters.AddWithValue("@distance", distance);
+                maCde4.ExecuteNonQuery();
 
-                maCde = new MySqlCommand(requête, maCo);
-                maCde.Parameters.AddWithValue("@secteur", secteurLu);
-
-                MySqlDataReader jeuEnregistrements;
-                jeuEnregistrements = maCde.ExecuteReader();
-                jeuEnregistrements.Read();
-                int numeroecteur;
-                IdentifiantAuteur = Convert.ToInt32(jeuEnregistrements["au_id"]);
-                jeuEnregistrements.Close();
-                // INSERTION dans titleauthor
-                requête = "Insert into titleauthor values (@isbn, @au_id)";
-                maCde = new NpgsqlCommand(requête, maCo);
-                maCde.Parameters.AddWithValue("@isbn", isbnLu);
-                maCde.Parameters.AddWithValue("@au_id", IdentifiantAuteur);
-
-                n = maCde.ExecuteNonQuery();
-                Console.WriteLine("\nInsertion de " + n.ToString() + " ligne(s) dans titleauthor\n");
+                MessageBox.Show("La liaison à été ajouté avec succès.");
             }
-            catch (Exception ex)
+            catch (MySqlException)
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show("La liaison n'as pas pu être ajouté.");
             }
             finally
             {
-                maCo.Close();
+                if (maCnx4 is object & maCnx4.State == ConnectionState.Open)
+                {
+                    maCnx4.Close(); //déconnection
+                }
             }
+            Console.ReadLine();
+            maCnx4.Close();
         }
 
         private void FormAjoutLiaison_Load(object sender, EventArgs e)
