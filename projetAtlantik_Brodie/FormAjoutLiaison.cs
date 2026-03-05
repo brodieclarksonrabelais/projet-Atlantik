@@ -32,8 +32,8 @@ namespace projetAtlantik_Brodie
                 maCnx4.Open();
                 requete = "insert into liaison(NOPORT_DEPART,NOSECTEUR, NOPORT_ARRIVEE,DISTANCE) values(@noportdepart,@nosecteur,@noportarrivee,@distance)";
                 var maCde4 = new MySqlCommand(requete, maCnx4);
-                maCde4.Parameters.AddWithValue("@noportdepart", ((Secteurs)lbxSecteurs.SelectedItem).GetNosecteur());
-                maCde4.Parameters.AddWithValue("@nosecteur", ((Ports)cmbDepart.SelectedItem).GetNoPorts());
+                maCde4.Parameters.AddWithValue("@nosecteur", ((Secteurs)lbxSecteurs.SelectedItem).GetNosecteur());
+                maCde4.Parameters.AddWithValue("@noportdepart", ((Ports)cmbDepart.SelectedItem).GetNoPorts());
                 maCde4.Parameters.AddWithValue("@noportarrivee", ((Ports)cmbArrivee.SelectedItem).GetNoPorts());
                 maCde4.Parameters.AddWithValue("@distance", distance);
                 maCde4.ExecuteNonQuery();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +11,14 @@ namespace projetAtlantik_Brodie
     internal class Liaison
     {
         private int noLiaison;
-        private int noPort_Depart;
-        private int noPort_Arrivee;
-        private int distance;
+        private string nomPortDepart;
+        private string nomPortArrivee;
 
-        public Liaison(int noLiaison, int noPort_Depart, int noPort_Arrivee, int distance)
+        public Liaison(int noLiaison, string nomPort_Depart, string nomPort_Arrivee)
         {
             this.noLiaison = noLiaison;
-            this.noPort_Depart = noPort_Depart;
-            this.noPort_Arrivee = noPort_Arrivee;
-            this.distance = distance;
+            this.nomPortDepart = nomPort_Depart;
+            this.nomPortArrivee = nomPort_Arrivee;
         }
 
         public int GetNoLiaison() 
@@ -27,9 +26,9 @@ namespace projetAtlantik_Brodie
             return noLiaison;
         }
 
-        public int GetDistance() 
+        public override string ToString()
         {
-            return distance;
+            return nomPortDepart + " - " + nomPortArrivee;
         }
     }
 }

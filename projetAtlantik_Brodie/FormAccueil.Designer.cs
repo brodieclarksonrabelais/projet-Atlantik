@@ -101,6 +101,7 @@
             this.lesTarifsPourUneLiaisonEtUnePériodeToolStripMenuItem.Name = "lesTarifsPourUneLiaisonEtUnePériodeToolStripMenuItem";
             this.lesTarifsPourUneLiaisonEtUnePériodeToolStripMenuItem.Size = new System.Drawing.Size(287, 22);
             this.lesTarifsPourUneLiaisonEtUnePériodeToolStripMenuItem.Text = "Les tarifs pour une liaison et une période";
+            this.lesTarifsPourUneLiaisonEtUnePériodeToolStripMenuItem.Click += new System.EventHandler(this.lesTarifsPourUneLiaisonEtUnePériodeToolStripMenuItem_Click);
             // 
             // unBateauToolStripMenuItem
             // 
@@ -188,6 +189,7 @@
             this.MainMenuStrip = this.menuStripAccueil;
             this.Name = "FormAccueil";
             this.Text = "Accueil";
+            this.Load += new System.EventHandler(this.FormAccueil_Load);
             this.menuStripAccueil.ResumeLayout(false);
             this.menuStripAccueil.PerformLayout();
             this.ResumeLayout(false);

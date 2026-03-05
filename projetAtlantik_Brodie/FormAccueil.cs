@@ -59,5 +59,16 @@ namespace projetAtlantik_Brodie
             FormAjoutLiaison formAjoutLiaison = new FormAjoutLiaison();
             formAjoutLiaison.ShowDialog();
         }
+
+        private void FormAccueil_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lesTarifsPourUneLiaisonEtUnePériodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAjoutTarif formAjoutTarif = new FormAjoutTarif();
+            formAjoutTarif.ShowDialog();
+        }
     }
 }
