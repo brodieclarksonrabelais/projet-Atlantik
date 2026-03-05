@@ -36,6 +36,7 @@
             this.cmbPeriodeTarif = new System.Windows.Forms.ComboBox();
             this.gbxCategorieTarif = new System.Windows.Forms.GroupBox();
             this.lblTarif = new System.Windows.Forms.Label();
+            this.btnAjoutTarif = new System.Windows.Forms.Button();
             this.gbxCategorieTarif.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,7 +101,7 @@
             this.gbxCategorieTarif.Size = new System.Drawing.Size(400, 323);
             this.gbxCategorieTarif.TabIndex = 6;
             this.gbxCategorieTarif.TabStop = false;
-            this.gbxCategorieTarif.Text = "Tarifs par catégories";
+            this.gbxCategorieTarif.Text = "Catégories";
             // 
             // lblTarif
             // 
@@ -112,11 +113,21 @@
             this.lblTarif.Text = "Tarifs";
             this.lblTarif.Click += new System.EventHandler(this.lblTarif_Click);
             // 
+            // btnAjoutTarif
+            // 
+            this.btnAjoutTarif.Location = new System.Drawing.Point(350, 405);
+            this.btnAjoutTarif.Name = "btnAjoutTarif";
+            this.btnAjoutTarif.Size = new System.Drawing.Size(75, 23);
+            this.btnAjoutTarif.TabIndex = 7;
+            this.btnAjoutTarif.Text = "Ajouter";
+            this.btnAjoutTarif.UseVisualStyleBackColor = true;
+            // 
             // FormAjoutTarif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAjoutTarif);
             this.Controls.Add(this.gbxCategorieTarif);
             this.Controls.Add(this.cmbPeriodeTarif);
             this.Controls.Add(this.lblPeriodeTarif);
@@ -144,5 +155,6 @@
         private System.Windows.Forms.ComboBox cmbPeriodeTarif;
         private System.Windows.Forms.GroupBox gbxCategorieTarif;
         private System.Windows.Forms.Label lblTarif;
+        private System.Windows.Forms.Button btnAjoutTarif;
     }
 }
