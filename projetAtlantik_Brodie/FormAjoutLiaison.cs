@@ -56,14 +56,14 @@ namespace projetAtlantik_Brodie
                 MySqlDataReader jeuEnregistrements;
                 jeuEnregistrements = maCde.ExecuteReader();
                 jeuEnregistrements.Read();
-                int numeroecteur;
-                IdentifiantAuteur = Convert.ToInt32(jeuEnregistrements["au_id"]);
+                int numeroSecteur;
+                numeroSecteur = Convert.ToInt32(jeuEnregistrements["au_id"]);
                 jeuEnregistrements.Close();
                 // INSERTION dans titleauthor
                 requête = "Insert into titleauthor values (@isbn, @au_id)";
                 maCde = new NpgsqlCommand(requête, maCo);
                 maCde.Parameters.AddWithValue("@isbn", isbnLu);
-                maCde.Parameters.AddWithValue("@au_id", IdentifiantAuteur);
+                maCde.Parameters.AddWithValue("@au_id", numeroSecteur);
 
                 n = maCde.ExecuteNonQuery();
                 Console.WriteLine("\nInsertion de " + n.ToString() + " ligne(s) dans titleauthor\n");
