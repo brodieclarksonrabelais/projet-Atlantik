@@ -17,7 +17,7 @@ namespace projetAtlantik_Brodie
             this.nomPort = nomPort;
         }
 
-        public int GetNosecteur()
+        public int GetNoPorts()
         {
             return noPort;
         }
