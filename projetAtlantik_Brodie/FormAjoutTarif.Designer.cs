@@ -35,6 +35,8 @@
             this.lblPeriodeTarif = new System.Windows.Forms.Label();
             this.cmbPeriodeTarif = new System.Windows.Forms.ComboBox();
             this.gbxCategorieTarif = new System.Windows.Forms.GroupBox();
+            this.lblTarif = new System.Windows.Forms.Label();
+            this.gbxCategorieTarif.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbxSecteurTarif
@@ -92,12 +94,23 @@
             // 
             // gbxCategorieTarif
             // 
+            this.gbxCategorieTarif.Controls.Add(this.lblTarif);
             this.gbxCategorieTarif.Location = new System.Drawing.Point(388, 37);
             this.gbxCategorieTarif.Name = "gbxCategorieTarif";
             this.gbxCategorieTarif.Size = new System.Drawing.Size(400, 323);
             this.gbxCategorieTarif.TabIndex = 6;
             this.gbxCategorieTarif.TabStop = false;
             this.gbxCategorieTarif.Text = "Tarifs par catégories";
+            // 
+            // lblTarif
+            // 
+            this.lblTarif.AutoSize = true;
+            this.lblTarif.Location = new System.Drawing.Point(203, 0);
+            this.lblTarif.Name = "lblTarif";
+            this.lblTarif.Size = new System.Drawing.Size(33, 13);
+            this.lblTarif.TabIndex = 1;
+            this.lblTarif.Text = "Tarifs";
+            this.lblTarif.Click += new System.EventHandler(this.lblTarif_Click);
             // 
             // FormAjoutTarif
             // 
@@ -114,6 +127,8 @@
             this.Name = "FormAjoutTarif";
             this.Text = "FormAjoutTarif";
             this.Load += new System.EventHandler(this.FormAjoutTarif_Load);
+            this.gbxCategorieTarif.ResumeLayout(false);
+            this.gbxCategorieTarif.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -128,5 +143,6 @@
         private System.Windows.Forms.Label lblPeriodeTarif;
         private System.Windows.Forms.ComboBox cmbPeriodeTarif;
         private System.Windows.Forms.GroupBox gbxCategorieTarif;
+        private System.Windows.Forms.Label lblTarif;
     }
 }

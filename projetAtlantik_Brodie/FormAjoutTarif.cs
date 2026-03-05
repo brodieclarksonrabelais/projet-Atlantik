@@ -77,11 +77,11 @@ namespace projetAtlantik_Brodie
                     i += 2;
                     lblCategorie = new Label();
                     lblCategorie.Text = lettreCategorie + noType.ToString() + " - " + libelle;
-                    lblCategorie.Location = new Point(5, i * 15);
+                    lblCategorie.Location = new Point(0, i * 15);
                     gbxCategorieTarif.Controls.Add(lblCategorie);
 
                     tbxCategorie = new TextBox();
-                    tbxCategorie.Location = new Point(5, i * 15);
+                    tbxCategorie.Location = new Point(200, i * 15);
                     gbxCategorieTarif.Controls.Add(tbxCategorie);
                 }
                 jeuEnregistrements.Close();
@@ -142,6 +142,11 @@ namespace projetAtlantik_Brodie
             {
                 maCo.Close();
             }
+        }
+
+        private void lblTarif_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
