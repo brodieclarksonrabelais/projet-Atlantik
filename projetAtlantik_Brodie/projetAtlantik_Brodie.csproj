@@ -125,11 +125,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bateaus.cs" />
     <Compile Include="FormAccueil.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormAccueil.Designer.cs">
       <DependentUpon>FormAccueil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAjoutBateau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAjoutBateau.Designer.cs">
+      <DependentUpon>FormAjoutBateau.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAjoutLiaison.cs">
       <SubType>Form</SubType>
@@ -155,6 +162,12 @@
     <Compile Include="FormAjoutTarif.Designer.cs">
       <DependentUpon>FormAjoutTarif.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormModifBateau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModifBateau.Designer.cs">
+      <DependentUpon>FormModifBateau.cs</DependentUpon>
+    </Compile>
     <Compile Include="Liaison.cs" />
     <Compile Include="Periode.cs" />
     <Compile Include="Ports.cs" />
@@ -163,6 +176,9 @@
     <Compile Include="Secteurs.cs" />
     <EmbeddedResource Include="FormAccueil.resx">
       <DependentUpon>FormAccueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAjoutBateau.resx">
+      <DependentUpon>FormAjoutBateau.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAjoutLiaison.resx">
       <DependentUpon>FormAjoutLiaison.cs</DependentUpon>
@@ -175,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAjoutTarif.resx">
       <DependentUpon>FormAjoutTarif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModifBateau.resx">
+      <DependentUpon>FormModifBateau.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

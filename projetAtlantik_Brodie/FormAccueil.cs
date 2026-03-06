@@ -34,7 +34,8 @@ namespace projetAtlantik_Brodie
 
         private void unBatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormModifBateau formModifBateau = new FormModifBateau();
+            formModifBateau.ShowDialog();
         }
 
         private void unSecteurToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,6 +70,12 @@ namespace projetAtlantik_Brodie
         {
             FormAjoutTarif formAjoutTarif = new FormAjoutTarif();
             formAjoutTarif.ShowDialog();
+        }
+
+        private void unBateauToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAjoutBateau formAjoutBateau = new FormAjoutBateau();
+            formAjoutBateau.ShowDialog();
         }
     }
 }

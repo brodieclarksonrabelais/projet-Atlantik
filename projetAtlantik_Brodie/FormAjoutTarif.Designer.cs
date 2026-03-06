@@ -121,6 +121,7 @@
             this.btnAjoutTarif.TabIndex = 7;
             this.btnAjoutTarif.Text = "Ajouter";
             this.btnAjoutTarif.UseVisualStyleBackColor = true;
+            this.btnAjoutTarif.Click += new System.EventHandler(this.btnAjoutTarif_Click);
             // 
             // FormAjoutTarif
             // 

@@ -108,6 +108,7 @@
             this.unBateauToolStripMenuItem.Name = "unBateauToolStripMenuItem";
             this.unBateauToolStripMenuItem.Size = new System.Drawing.Size(287, 22);
             this.unBateauToolStripMenuItem.Text = "Un bateau";
+            this.unBateauToolStripMenuItem.Click += new System.EventHandler(this.unBateauToolStripMenuItem_Click);
             // 
             // uneTraverséToolStripMenuItem
             // 

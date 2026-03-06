@@ -40,9 +40,9 @@ namespace projetAtlantik_Brodie
 
                 MessageBox.Show("La liaison à été ajouté avec succès.");
             }
-            catch (MySqlException)
+            catch (MySqlException ex)
             {
-                MessageBox.Show("La liaison n'as pas pu être ajouté.");
+                MessageBox.Show(ex.Message);
             }
             finally
             {
