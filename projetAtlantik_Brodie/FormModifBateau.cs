@@ -25,7 +25,7 @@ namespace projetAtlantik_Brodie
             MySqlConnection maCo;
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             string requête;
-            MySqlCommand maCde;
+            MySqlCommand maCde, maCde2;
 
             try
             {
@@ -34,6 +34,7 @@ namespace projetAtlantik_Brodie
                 int noBateau;
                 string nomBateau;
                 maCo.Open();
+                
                 requête = "Select * from bateau";
                 maCde = new MySqlCommand(requête, maCo);
                 MySqlDataReader jeuEnregistrements;
@@ -47,8 +48,8 @@ namespace projetAtlantik_Brodie
                 jeuEnregistrements.Close();
 
                 requête = "Select * from categorie";
-                maCde = new MySqlCommand(requête, maCo);
-                jeuEnregistrements = maCde.ExecuteReader();
+                maCde2 = new MySqlCommand(requête, maCo);
+                jeuEnregistrements = maCde2.ExecuteReader();
 
                 Label lblCategorie;
                 TextBox tbxCategorie;
@@ -58,7 +59,7 @@ namespace projetAtlantik_Brodie
                 {
                     string lettreCategorie = jeuEnregistrements["lettrecategorie"].ToString();
                     string libelle = jeuEnregistrements["libelle"].ToString();
-                    string capaciteMax = jeuEnregistrements["capacitemax"].ToString();
+                    
 
                     i += 2;
                     lblCategorie = new Label();
@@ -67,8 +68,7 @@ namespace projetAtlantik_Brodie
                     gbxCapaciteMaxModif.Controls.Add(lblCategorie);
 
                     tbxCategorie = new TextBox();
-                    tbxCategorie.Tag = lettreCategorie + ";";
-                    tbxCategorie.Text = capaciteMax;
+                    tbxCategorie.Tag = lettreCategorie;
                     tbxCategorie.Location = new Point(200, i * 15);
                     gbxCapaciteMaxModif.Controls.Add(tbxCategorie);
                 }
@@ -89,16 +89,65 @@ namespace projetAtlantik_Brodie
             string requete;
             MySqlConnection maCnx;
             maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
+            MySqlCommand maCde;
 
             try
             {
                 maCnx.Open();
                 string nom = cmbNomBateau.Text;
-                requete = "Insert into bateau(nom) values (@nom)";
-                var maCde = new MySqlCommand(requete, maCnx);
+                string capaciteMax;
+                string lettreCategorie;
+
+                requete = "Select b.nobateau, nom, capacitemax, lettrecategorie from bateau b inner join contenir c on (b.nobateau = c.nobateau) where nom = @nom";
+                maCde = new MySqlCommand(requete, maCnx);
                 maCde.Parameters.AddWithValue("@nom", nom);
-                maCde.ExecuteNonQuery();
-                int noBateau = (int)maCde.LastInsertedId;
+                MySqlDataReader jeuEnregistrements;
+                jeuEnregistrements = maCde.ExecuteReader();
+                while (jeuEnregistrements.Read())
+                {
+                    capaciteMax = jeuEnregistrements["capacitemax"].ToString();
+                    lettreCategorie = jeuEnregistrements["lettrecategorie"].ToString();
+                    foreach (Control c in gbxCapaciteMaxModif.Controls)
+                    {
+                        if (c is TextBox tbxCategorie)
+                        {
+                            if (tbxCategorie.Tag.ToString() == lettreCategorie)
+                            {
+                                tbxCategorie.Text = capaciteMax;
+                            }
+                        }
+                    }
+                }
+                jeuEnregistrements.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                maCnx.Close();
+            }
+
+
+        }
+
+        private void btnModifierBateau_Click(object sender, EventArgs e)
+        {
+            string requete;
+            MySqlConnection maCnx;
+            maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
+            MySqlCommand maCde;
+
+            maCnx.Open();
+            string noBateau = ((Bateaus)cmbNomBateau.SelectedItems);
+            requete = "Select nobateau from contenir";
+            maCde = new MySqlCommand(requete, maCnx);
+            maCde.Parameters.AddWithValue("@nobateau", noBateau);
+            maCde.ExecuteNonQuery();
+            try
+            {
+                string nom = cmbNomBateau.Text;
 
                 foreach (Control c in gbxCapaciteMaxModif.Controls)
                 {
@@ -114,12 +163,13 @@ namespace projetAtlantik_Brodie
                         string lettreCategorie = tableau[0].ToString();
                         int capaciteMax = int.Parse(txt.Text);
 
-                        requete = "Update contenir set lettrecategorie = @lettrecategorie, nobateau = @nobateau, capacitemax = @capacitemax)";
+                        requete = "Update contenir set capacitemax = @capacitemax where lettrecategorie = @lettrecategorie and nobateau = @nobateau";
                         var maCde2 = new MySqlCommand(requete, maCnx);
+                        maCde2.Parameters.AddWithValue("@capacitemax", capaciteMax);
                         maCde2.Parameters.AddWithValue("@lettrecategorie", lettreCategorie);
                         maCde2.Parameters.AddWithValue("@nobateau", noBateau);
-                        maCde2.Parameters.AddWithValue("@capacitemax", capaciteMax);
                         maCde2.ExecuteNonQuery();
+
                     }
                 }
                 MessageBox.Show("Votre bateau a été modifié avec succès");
@@ -132,8 +182,6 @@ namespace projetAtlantik_Brodie
             {
                 maCnx.Close();
             }
-
-
         }
     }
 }

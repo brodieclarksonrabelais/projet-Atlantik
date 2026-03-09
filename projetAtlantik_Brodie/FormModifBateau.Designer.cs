@@ -69,6 +69,7 @@
             this.btnModifierBateau.TabIndex = 3;
             this.btnModifierBateau.Text = "Modifier";
             this.btnModifierBateau.UseVisualStyleBackColor = true;
+            this.btnModifierBateau.Click += new System.EventHandler(this.btnModifierBateau_Click);
             // 
             // FormModifBateau
             // 
