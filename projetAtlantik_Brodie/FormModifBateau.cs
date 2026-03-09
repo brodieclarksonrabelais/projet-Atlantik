@@ -140,13 +140,20 @@ namespace projetAtlantik_Brodie
             MySqlCommand maCde;
 
             maCnx.Open();
-            string noBateau = ((Bateaus)cmbNomBateau.SelectedItems);
+            int noBateau = ((Bateaus)cmbNomBateau.SelectedItem).getNoBateau();
             requete = "Select nobateau from contenir";
             maCde = new MySqlCommand(requete, maCnx);
-            maCde.Parameters.AddWithValue("@nobateau", noBateau);
-            maCde.ExecuteNonQuery();
+            MySqlDataReader jeuEnregistrements;
+            jeuEnregistrements = maCde.ExecuteReader();
+            while (jeuEnregistrements.Read())
+            {
+                noBateau = Convert.ToInt32(jeuEnregistrements["nobateau"]);
+            }
+            maCnx.Close();
+
             try
             {
+                maCnx.Open();
                 string nom = cmbNomBateau.Text;
 
                 foreach (Control c in gbxCapaciteMaxModif.Controls)
