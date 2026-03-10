@@ -77,5 +77,17 @@ namespace projetAtlantik_Brodie
             FormAjoutBateau formAjoutBateau = new FormAjoutBateau();
             formAjoutBateau.ShowDialog();
         }
+
+        private void uneTraverséToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAjoutTraversee formAjoutTraversee = new FormAjoutTraversee();
+            formAjoutTraversee.ShowDialog();
+        }
+
+        private void lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAffichageTraversee formAffichageTraversee = new FormAffichageTraversee();
+            formAffichageTraversee.ShowDialog();
+        }
     }
 }

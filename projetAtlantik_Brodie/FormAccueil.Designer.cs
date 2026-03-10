@@ -115,6 +115,7 @@
             this.uneTraverséToolStripMenuItem.Name = "uneTraverséToolStripMenuItem";
             this.uneTraverséToolStripMenuItem.Size = new System.Drawing.Size(287, 22);
             this.uneTraverséToolStripMenuItem.Text = "Une traversé";
+            this.uneTraverséToolStripMenuItem.Click += new System.EventHandler(this.uneTraverséToolStripMenuItem_Click);
             // 
             // modifierToolStripMenuItem
             // 
@@ -151,15 +152,15 @@
             // 
             this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Name = "lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStrip" +
     "MenuItem";
-            this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Size = new System.Drawing.Size(519, 22);
-            this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Text = "Les traversées pour une liaison et une date donnée avec place restantes par catég" +
-    "orie";
+            this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Text = "Les traversées";
+            this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Click += new System.EventHandler(this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem_Click);
             // 
             // lesDétailsPourUneRéservationPourUnClientToolStripMenuItem
             // 
             this.lesDétailsPourUneRéservationPourUnClientToolStripMenuItem.Name = "lesDétailsPourUneRéservationPourUnClientToolStripMenuItem";
-            this.lesDétailsPourUneRéservationPourUnClientToolStripMenuItem.Size = new System.Drawing.Size(519, 22);
-            this.lesDétailsPourUneRéservationPourUnClientToolStripMenuItem.Text = "Les détails pour une réservation pour un client";
+            this.lesDétailsPourUneRéservationPourUnClientToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.lesDétailsPourUneRéservationPourUnClientToolStripMenuItem.Text = "Les détails d\'une réservation";
             this.lesDétailsPourUneRéservationPourUnClientToolStripMenuItem.Click += new System.EventHandler(this.lesDétailsPourUneRéservationPourUnClientToolStripMenuItem_Click);
             // 
             // aProposToolStripMenuItem
