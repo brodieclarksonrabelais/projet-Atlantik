@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bateaus.cs" />
+    <Compile Include="Categories.cs" />
     <Compile Include="FormAccueil.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +187,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Secteurs.cs" />
+    <Compile Include="Traversees.cs" />
     <EmbeddedResource Include="FormAccueil.resx">
       <DependentUpon>FormAccueil.cs</DependentUpon>
     </EmbeddedResource>
