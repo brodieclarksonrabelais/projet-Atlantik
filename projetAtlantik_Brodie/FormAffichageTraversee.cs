@@ -30,7 +30,7 @@ namespace projetAtlantik_Brodie
             try
             {
                 int quantiteReserve = 0;
-                requete = "Select sum(quantitereserve) from reservation r inner join enregistrer e on (e.noreservation = r.noreservation) inner join traversee t on (r.notraversee = t.notraversee) where notraversee = @notraversee and lettrecategorie = @lettrecategorie;";
+                requete = "Select sum(quantitereservee) from reservation r inner join enregistrer e on (e.noreservation = r.noreservation) inner join traversee t on (r.notraversee = t.notraversee) where r.notraversee = @notraversee and lettrecategorie = @lettrecategorie;";
                 maCde = new MySqlCommand(requete, maCo);
                 maCde.Parameters.AddWithValue("@notraversee", pNoTraversee);
                 maCde.Parameters.AddWithValue("@lettrecategorie", pLettreCategorie);
@@ -38,7 +38,7 @@ namespace projetAtlantik_Brodie
                 jeuEnregistrements = maCde.ExecuteReader();
                 while (jeuEnregistrements.Read())
                 {
-                    quantiteReserve = (int)jeuEnregistrements["quantitereserve"];
+                    quantiteReserve = (int)jeuEnregistrements["sum(quantitereservee)"];
                 }
                 jeuEnregistrements.Close();
                 return quantiteReserve;
@@ -88,7 +88,7 @@ namespace projetAtlantik_Brodie
             }
         }
 
-        private List<object> GetLesCategories()
+        private List<Categories> GetLesCategories()
         {
             MySqlConnection maCo;
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
@@ -108,7 +108,8 @@ namespace projetAtlantik_Brodie
                     {
                         string lettreCategorie = (string)jeuEnregistrements["lettrecategorie"];
                         string libelle = (string)jeuEnregistrements["libelle"];
-                        LesCategories.Add(libelle, lettreCategorie);
+                        Categories cat = new Categories(lettreCategorie, libelle); 
+                        LesCategories.Add(cat);
                     }
                     jeuEnregistrements.Close();
                 }
@@ -126,7 +127,7 @@ namespace projetAtlantik_Brodie
             }
         }
 
-        private List<object> GetLesTraverseesBateaux(int pNoLiaison, string pDateTraversee)
+        private List<Traversees> GetLesTraverseesBateaux(int pNoLiaison, string pDateTraversee)
         {
             MySqlConnection maCo;
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
@@ -138,18 +139,19 @@ namespace projetAtlantik_Brodie
                 List<Traversees> LesTraversees = new List<Traversees>();
                 foreach(Traversees t in LesTraversees)
                 {
-                    requete = "Select notraverse, nom, datedepart from traversee t inner join bateau b on (t.nobateau = b.nobateau) where noliaison = @noliaison and datedepart = @datedepart;";
+                    requete = "Select notraversee, nom, dateheuredepart from traversee t inner join bateau b on (t.nobateau = b.nobateau) where noliaison = @noliaison and dateheuredepart = @dateheuredepart;";
                     maCde = new MySqlCommand(requete, maCo);
                     maCde.Parameters.AddWithValue("@noliaison", pNoLiaison);
-                    maCde.Parameters.AddWithValue("@datedepart", pDateTraversee);
+                    maCde.Parameters.AddWithValue("@dateheuredepart", pDateTraversee);
                     MySqlDataReader jeuEnregistrements;
                     jeuEnregistrements = maCde.ExecuteReader();
                     while (jeuEnregistrements.Read())
                     {
-                        string notraverse = (string)jeuEnregistrements["notraverse"];
+                        int notraverse = (int)jeuEnregistrements["notraversee"];
                         string nom = (string)jeuEnregistrements["nom"];
-                        string datedepart = (string)jeuEnregistrements["datedepart"];
-                        LesTraversees.Add(notraverse, nom, datedepart);
+                        string dateheuredepart = (string)jeuEnregistrements["dateheuredepart"];
+                        Traversees trav = new Traversees(notraverse, nom, dateheuredepart);
+                        LesTraversees.Add(trav);
                     }
                     jeuEnregistrements.Close();
                 }
