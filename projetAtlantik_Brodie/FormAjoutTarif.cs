@@ -158,7 +158,6 @@ namespace projetAtlantik_Brodie
             maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             try
             {
-
                 maCnx.Open();
                 foreach (Control c in gbxCategorieTarif.Controls)
                 {

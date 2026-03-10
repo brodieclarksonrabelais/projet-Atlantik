@@ -132,6 +132,12 @@
     <Compile Include="FormAccueil.Designer.cs">
       <DependentUpon>FormAccueil.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAffichageTraversee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAffichageTraversee.Designer.cs">
+      <DependentUpon>FormAffichageTraversee.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAjoutBateau.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     <Compile Include="Secteurs.cs" />
     <EmbeddedResource Include="FormAccueil.resx">
       <DependentUpon>FormAccueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAffichageTraversee.resx">
+      <DependentUpon>FormAffichageTraversee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAjoutBateau.resx">
       <DependentUpon>FormAjoutBateau.cs</DependentUpon>

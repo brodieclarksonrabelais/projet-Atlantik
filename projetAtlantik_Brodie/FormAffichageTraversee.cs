@@ -1,10 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +18,153 @@ namespace projetAtlantik_Brodie
         public FormAffichageTraversee()
         {
             InitializeComponent();
+        }
+
+        private int getQuantiteEnregistree(int pNoTraversee, string pLettreCategorie)
+        {
+            MySqlConnection maCo;
+            maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
+            string requete;
+            MySqlCommand maCde;
+            maCo.Open();
+            try
+            {
+                int quantiteReserve = 0;
+                requete = "Select sum(quantitereserve) from reservation r inner join enregistrer e on (e.noreservation = r.noreservation) inner join traversee t on (r.notraversee = t.notraversee) where notraversee = @notraversee and lettrecategorie = @lettrecategorie;";
+                maCde = new MySqlCommand(requete, maCo);
+                maCde.Parameters.AddWithValue("@notraversee", pNoTraversee);
+                maCde.Parameters.AddWithValue("@lettrecategorie", pLettreCategorie);
+                MySqlDataReader jeuEnregistrements;
+                jeuEnregistrements = maCde.ExecuteReader();
+                while (jeuEnregistrements.Read())
+                {
+                    quantiteReserve = (int)jeuEnregistrements["quantitereserve"];
+                }
+                jeuEnregistrements.Close();
+                return quantiteReserve;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return -1;
+            }
+            finally
+            {
+                maCo.Close();
+            }
+        }
+
+        private int getCapaciteMaximale(int pNoTraversee, string pLettreCategorie)
+        {
+            MySqlConnection maCo;
+            maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
+            string requete;
+            MySqlCommand maCde;
+            maCo.Open();
+            try
+            {
+                int capacitemax = 0;
+                requete = "Select capacitemax from bateau b inner join contenir c on (b.nobateau = c.nobateau) inner join traversee t on (b.nobateau = t.nobateau) where notraversee = @notraversee and lettrecategorie = @lettrecategorie;";
+                maCde = new MySqlCommand(requete, maCo);
+                maCde.Parameters.AddWithValue("@notraversee", pNoTraversee);
+                maCde.Parameters.AddWithValue("@lettrecategorie", pLettreCategorie);
+                MySqlDataReader jeuEnregistrements;
+                jeuEnregistrements = maCde.ExecuteReader();
+                while (jeuEnregistrements.Read())
+                {
+                    capacitemax = (int)jeuEnregistrements["capacitemax"];
+                }
+                jeuEnregistrements.Close();
+                return capacitemax;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return -1;
+            }
+            finally
+            {
+                maCo.Close();
+            }
+        }
+
+        private List<object> GetLesCategories()
+        {
+            MySqlConnection maCo;
+            maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
+            string requete;
+            MySqlCommand maCde;
+            maCo.Open();
+            try
+            {
+                List<Categories> LesCategories = new List<Categories>();
+                foreach (Categories c in LesCategories)
+                {
+                    requete = "Select * from categorie;";
+                    maCde = new MySqlCommand(requete, maCo);
+                    MySqlDataReader jeuEnregistrements;
+                    jeuEnregistrements = maCde.ExecuteReader();
+                    while (jeuEnregistrements.Read())
+                    {
+                        string lettreCategorie = (string)jeuEnregistrements["lettrecategorie"];
+                        string libelle = (string)jeuEnregistrements["libelle"];
+                        LesCategories.Add(libelle, lettreCategorie);
+                    }
+                    jeuEnregistrements.Close();
+                }
+                return LesCategories;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                List<Categories> LesCategories = new List<Categories>();
+                return LesCategories;
+            }
+            finally
+            {
+                maCo.Close();
+            }
+        }
+
+        private List<object> GetLesTraverseesBateaux(int pNoLiaison, string pDateTraversee)
+        {
+            MySqlConnection maCo;
+            maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
+            string requete;
+            MySqlCommand maCde;
+            maCo.Open();
+            try
+            {
+                List<Traversees> LesTraversees = new List<Traversees>();
+                foreach(Traversees t in LesTraversees)
+                {
+                    requete = "Select notraverse, nom, datedepart from traversee t inner join bateau b on (t.nobateau = b.nobateau) where noliaison = @noliaison and datedepart = @datedepart;";
+                    maCde = new MySqlCommand(requete, maCo);
+                    maCde.Parameters.AddWithValue("@noliaison", pNoLiaison);
+                    maCde.Parameters.AddWithValue("@datedepart", pDateTraversee);
+                    MySqlDataReader jeuEnregistrements;
+                    jeuEnregistrements = maCde.ExecuteReader();
+                    while (jeuEnregistrements.Read())
+                    {
+                        string notraverse = (string)jeuEnregistrements["notraverse"];
+                        string nom = (string)jeuEnregistrements["nom"];
+                        string datedepart = (string)jeuEnregistrements["datedepart"];
+                        LesTraversees.Add(notraverse, nom, datedepart);
+                    }
+                    jeuEnregistrements.Close();
+                }
+                return LesTraversees;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                List<Traversees> LesTraversees = new List<Traversees>();
+                return LesTraversees;
+            }
+            finally
+            {
+                maCo.Close();
+            }
         }
 
         private void lbxSecteursTraversee_SelectedIndexChanged(object sender, EventArgs e)
@@ -66,6 +215,18 @@ namespace projetAtlantik_Brodie
 
             try
             {
+
+                lvAffichageTraversee.View = View.Details;
+                lvAffichageTraversee.GridLines = true;
+                lvAffichageTraversee.FullRowSelect = true;
+
+                lvAffichageTraversee.Columns.Add("N°", 70);
+                lvAffichageTraversee.Columns.Add("Heure", 50);
+                lvAffichageTraversee.Columns.Add("Bateau", 100);
+                lvAffichageTraversee.Columns.Add("A\r Passager", 85);
+                lvAffichageTraversee.Columns.Add("B\r Véh.inf.2m", 85);
+                lvAffichageTraversee.Columns.Add("C\r Véh.sup.2m", 85);
+
                 ////////////////Selection secteur////////////////
 
                 int noSecteur;
@@ -90,6 +251,28 @@ namespace projetAtlantik_Brodie
             finally
             {
                 maCo.Close();
+            }
+        }
+
+        private void btnAfficherTraversee_Click(object sender, EventArgs e)
+        {
+            MySqlConnection maCnx;
+            maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
+            string requete;
+            MySqlCommand maCde;
+
+            maCnx.Open();
+            try
+            {
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                maCnx.Close();
             }
         }
     }

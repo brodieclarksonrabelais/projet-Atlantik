@@ -97,6 +97,7 @@
             this.btnAfficherTraversee.TabIndex = 14;
             this.btnAfficherTraversee.Text = "Afficher";
             this.btnAfficherTraversee.UseVisualStyleBackColor = true;
+            this.btnAfficherTraversee.Click += new System.EventHandler(this.btnAfficherTraversee_Click);
             // 
             // lvAffichageTraversee
             // 
