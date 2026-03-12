@@ -235,6 +235,8 @@ namespace projetAtlantik_Brodie
                 }
                 jeuEnregistrements.Close();
 
+                lvAffichageTraversee.Items.Clear();
+                lvAffichageTraversee.Columns.Clear();
 
                 lvAffichageTraversee.View = View.Details;
                 lvAffichageTraversee.GridLines = true;
@@ -270,9 +272,11 @@ namespace projetAtlantik_Brodie
             {
                 int noLiason = ((Liaison)cmbLiaisonTraversee.SelectedItem).GetNoLiaison();
                 DateTime dateDepart = DateTime.Parse(dateTraversee.Value.ToString());
-
                 var tabItem = new string[3];
-                requete = "Select notraversee, c.lettrecategorie, DATE_FORMAT(dateheuredepart, '%H:%i') as heure from traversee t inner join contenir c on (t.nobateau = c.nobateau) inner join bateau b on (t.nobateau = b.nobateau) where noliaison = @noliaison and dateheuredepart like DATE(@dateheuredepart)";
+                List<Traversees> Lestraversees = new List<Traversees>();
+                List<Categories> Lescategories = new List<Categories>();
+
+                requete = "Select notraversee, c.lettrecategorie, DATE_FORMAT(dateheuredepart, '%H:%i') as heure from traversee t inner join contenir c on (t.nobateau = c.nobateau) inner join bateau b on (t.nobateau = b.nobateau) where noliaison = @noliaison and DATE(dateheuredepart) like DATE(@dateheuredepart)";
                 maCde = new MySqlCommand(requete, maCnx);
                 maCde.Parameters.AddWithValue("@noliaison", noLiason);
                 maCde.Parameters.AddWithValue("@dateheuredepart", dateDepart);
@@ -285,10 +289,18 @@ namespace projetAtlantik_Brodie
                     string lettreCategorie = (string)jeuEnregistrements["lettrecategorie"];
                     string heure = (string)jeuEnregistrements["heure"];
 
-
-                    tabItem[0] = GetLesTraverseesBateaux(noLiason, dateDepart).ToString();
-                    tabItem[3] = (GetCapaciteMaximale(noTraverse, lettreCategorie) - GetQuantiteEnregistree(noTraverse, lettreCategorie)).ToString();
-                    lvAffichageTraversee.Items.Add(new ListViewItem(tabItem));
+                    foreach (Traversees trav in Lestraversees)
+                    {
+                        tabItem[0] = GetLesTraverseesBateaux(noLiason, dateDepart)[0].ToString();
+                        tabItem[1] = GetLesTraverseesBateaux(noLiason, dateDepart)[1].ToString();
+                        tabItem[2] = GetLesTraverseesBateaux(noLiason, dateDepart)[2].ToString();
+                        
+                        foreach (Categories cat in Lescategories)
+                        {
+                            tabItem[3] = (GetCapaciteMaximale(noTraverse, lettreCategorie) - GetQuantiteEnregistree(noTraverse, lettreCategorie)).ToString();
+                            lvAffichageTraversee.Items.Add(new ListViewItem(tabItem));
+                        }
+                    }
                 }
                 MessageBox.Show("Voici la liste des traversées");
             }
