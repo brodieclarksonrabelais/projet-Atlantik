@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Npgsql;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace projetAtlantik_Brodie
             InitializeComponent();
         }
 
-        private int getQuantiteEnregistree(int pNoTraversee, string pLettreCategorie)
+        private int GetQuantiteEnregistree(int pNoTraversee, string pLettreCategorie)
         {
             MySqlConnection maCo;
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
@@ -54,7 +55,7 @@ namespace projetAtlantik_Brodie
             }
         }
 
-        private int getCapaciteMaximale(int pNoTraversee, string pLettreCategorie)
+        private int GetCapaciteMaximale(int pNoTraversee, string pLettreCategorie)
         {
             MySqlConnection maCo;
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
@@ -127,7 +128,7 @@ namespace projetAtlantik_Brodie
             }
         }
 
-        private List<Traversees> GetLesTraverseesBateaux(int pNoLiaison, string pDateTraversee)
+        private List<Traversees> GetLesTraverseesBateaux(int pNoLiaison, DateTime pDateTraversee)
         {
             MySqlConnection maCo;
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
@@ -148,9 +149,9 @@ namespace projetAtlantik_Brodie
                     while (jeuEnregistrements.Read())
                     {
                         int notraverse = (int)jeuEnregistrements["notraversee"];
-                        string nom = (string)jeuEnregistrements["nom"];
-                        string dateheuredepart = (string)jeuEnregistrements["dateheuredepart"];
-                        Traversees trav = new Traversees(notraverse, nom, dateheuredepart);
+                        DateTime dateheuredepart = (DateTime)jeuEnregistrements["dateheuredepart"];
+
+                        Traversees trav = new Traversees(notraverse, dateheuredepart);
                         LesTraversees.Add(trav);
                     }
                     jeuEnregistrements.Close();
@@ -217,18 +218,6 @@ namespace projetAtlantik_Brodie
 
             try
             {
-
-                lvAffichageTraversee.View = View.Details;
-                lvAffichageTraversee.GridLines = true;
-                lvAffichageTraversee.FullRowSelect = true;
-
-                lvAffichageTraversee.Columns.Add("N°", 70);
-                lvAffichageTraversee.Columns.Add("Heure", 50);
-                lvAffichageTraversee.Columns.Add("Bateau", 100);
-                lvAffichageTraversee.Columns.Add("A\r Passager", 85);
-                lvAffichageTraversee.Columns.Add("B\r Véh.inf.2m", 85);
-                lvAffichageTraversee.Columns.Add("C\r Véh.sup.2m", 85);
-
                 ////////////////Selection secteur////////////////
 
                 int noSecteur;
@@ -245,6 +234,18 @@ namespace projetAtlantik_Brodie
                     lbxSecteursTraversee.Items.Add(new Secteurs(noSecteur, nomSecteur));
                 }
                 jeuEnregistrements.Close();
+
+
+                lvAffichageTraversee.View = View.Details;
+                lvAffichageTraversee.GridLines = true;
+                lvAffichageTraversee.FullRowSelect = true;
+
+                lvAffichageTraversee.Columns.Add("N°", 70);
+                lvAffichageTraversee.Columns.Add("Heure", 50);
+                lvAffichageTraversee.Columns.Add("Bateau", 100);
+                lvAffichageTraversee.Columns.Add("A\r Passager", 85);
+                lvAffichageTraversee.Columns.Add("B\r Véh.inf.2m", 85);
+                lvAffichageTraversee.Columns.Add("C\r Véh.sup.2m", 85);
             }
             catch (Exception ex)
             {
@@ -263,10 +264,33 @@ namespace projetAtlantik_Brodie
             string requete;
             MySqlCommand maCde;
 
+
             maCnx.Open();
             try
             {
+                int noLiason = ((Liaison)cmbLiaisonTraversee.SelectedItem).GetNoLiaison();
+                DateTime dateDepart = DateTime.Parse(dateTraversee.Value.ToString());
+
+                var tabItem = new string[3];
+                requete = "Select notraversee, c.lettrecategorie, DATE_FORMAT(dateheuredepart, '%H:%i') as heure from traversee t inner join contenir c on (t.nobateau = c.nobateau) inner join bateau b on (t.nobateau = b.nobateau) where noliaison = @noliaison and dateheuredepart like DATE(@dateheuredepart)";
+                maCde = new MySqlCommand(requete, maCnx);
+                maCde.Parameters.AddWithValue("@noliaison", noLiason);
+                maCde.Parameters.AddWithValue("@dateheuredepart", dateDepart);
+                MySqlDataReader jeuEnregistrements;
+                jeuEnregistrements = maCde.ExecuteReader();
                
+                while (jeuEnregistrements.Read())
+                {
+                    int noTraverse = (int)jeuEnregistrements["notraversee"];
+                    string lettreCategorie = (string)jeuEnregistrements["lettrecategorie"];
+                    string heure = (string)jeuEnregistrements["heure"];
+
+
+                    tabItem[0] = GetLesTraverseesBateaux(noLiason, dateDepart).ToString();
+                    tabItem[3] = (GetCapaciteMaximale(noTraverse, lettreCategorie) - GetQuantiteEnregistree(noTraverse, lettreCategorie)).ToString();
+                    lvAffichageTraversee.Items.Add(new ListViewItem(tabItem));
+                }
+                MessageBox.Show("Voici la liste des traversées");
             }
             catch (Exception ex)
             {

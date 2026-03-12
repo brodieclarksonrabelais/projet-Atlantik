@@ -32,7 +32,7 @@
             this.lbxSecteursTraversee = new System.Windows.Forms.ListBox();
             this.lblLiaisonTraversee = new System.Windows.Forms.Label();
             this.cmbLiaisonTraversee = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTraversee = new System.Windows.Forms.DateTimePicker();
             this.lblDtacAffichage = new System.Windows.Forms.Label();
             this.btnAfficherTraversee = new System.Windows.Forms.Button();
             this.lvAffichageTraversee = new System.Windows.Forms.ListView();
@@ -73,12 +73,13 @@
             this.cmbLiaisonTraversee.Size = new System.Drawing.Size(121, 21);
             this.cmbLiaisonTraversee.TabIndex = 11;
             // 
-            // dateTimePicker1
+            // dateTraversee
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(355, 49);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 12;
+            this.dateTraversee.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTraversee.Location = new System.Drawing.Point(355, 49);
+            this.dateTraversee.Name = "dateTraversee";
+            this.dateTraversee.Size = new System.Drawing.Size(200, 20);
+            this.dateTraversee.TabIndex = 12;
             // 
             // lblDtacAffichage
             // 
@@ -116,7 +117,7 @@
             this.Controls.Add(this.lvAffichageTraversee);
             this.Controls.Add(this.btnAfficherTraversee);
             this.Controls.Add(this.lblDtacAffichage);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dateTraversee);
             this.Controls.Add(this.cmbLiaisonTraversee);
             this.Controls.Add(this.lblLiaisonTraversee);
             this.Controls.Add(this.lbxSecteursTraversee);
@@ -135,7 +136,7 @@
         private System.Windows.Forms.ListBox lbxSecteursTraversee;
         private System.Windows.Forms.Label lblLiaisonTraversee;
         private System.Windows.Forms.ComboBox cmbLiaisonTraversee;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTraversee;
         private System.Windows.Forms.Label lblDtacAffichage;
         private System.Windows.Forms.Button btnAfficherTraversee;
         private System.Windows.Forms.ListView lvAffichageTraversee;

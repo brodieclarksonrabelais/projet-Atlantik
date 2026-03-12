@@ -9,14 +9,12 @@ namespace projetAtlantik_Brodie
     internal class Traversees
     {
         private int noTraverse;
-        private string dateHeureDepart;
-        private string dateHeureArrive;
+        private DateTime dateHeure;
 
-        public Traversees(int noTraverse, string dateHeureDepart, string dateHeureArrive)
+        public Traversees(int noTraverse, DateTime dateHeureDepart)
         {
             this.noTraverse = noTraverse;
-            this.dateHeureDepart = dateHeureDepart;
-            this.dateHeureArrive = dateHeureArrive;
+            this.dateHeure = dateHeureDepart;
         }
 
         public int getNoTraverse()
