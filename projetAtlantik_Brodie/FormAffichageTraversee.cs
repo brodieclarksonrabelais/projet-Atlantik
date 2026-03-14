@@ -30,7 +30,7 @@ namespace projetAtlantik_Brodie
             maCo.Open();
             try
             {
-                int quantiteReserve = 0;
+                int quantiteReservee = 0;
                 requete = "Select sum(quantitereservee) from reservation r inner join enregistrer e on (e.noreservation = r.noreservation) inner join traversee t on (r.notraversee = t.notraversee) where r.notraversee = @notraversee and lettrecategorie = @lettrecategorie;";
                 maCde = new MySqlCommand(requete, maCo);
                 maCde.Parameters.AddWithValue("@notraversee", pNoTraversee);
@@ -39,14 +39,17 @@ namespace projetAtlantik_Brodie
                 jeuEnregistrements = maCde.ExecuteReader();
                 while (jeuEnregistrements.Read())
                 {
-                    quantiteReserve = Convert.ToInt32(jeuEnregistrements["sum(quantitereservee)"]);
-                    if (quantiteReserve == 0) 
+                    if (jeuEnregistrements["sum(quantitereservee)"] == DBNull.Value)
                     {
-                        return 0;
+                        quantiteReservee = 0;
+                    }
+                    else
+                    {
+                        quantiteReservee = Convert.ToInt32(jeuEnregistrements["sum(quantitereservee)"]);
                     }
                 }
                 jeuEnregistrements.Close();
-                return quantiteReserve;
+                return quantiteReservee;
             }
             catch (Exception ex)
             {
@@ -262,7 +265,7 @@ namespace projetAtlantik_Brodie
                 List<Traversees> Lestraversees = new List<Traversees>(GetLesTraverseesBateaux(noLiason, dateDepart));
                 List<Categories> Lescategories = new List<Categories>(GetLesCategories());
 
-                requete = "Select notraversee, c.lettrecategorie, DATE_FORMAT(dateheuredepart, '%H:%i') as heure, nom from traversee t inner join contenir c on (t.nobateau = c.nobateau) inner join bateau b on (t.nobateau = b.nobateau) where noliaison = @noliaison and DATE(dateheuredepart) = DATE(@dateheuredepart)";
+                requete = "Select notraversee, DATE_FORMAT(dateheuredepart, '%H:%i') as heure, nom from traversee t inner join bateau b on (t.nobateau = b.nobateau) where noliaison = @noliaison and DATE(dateheuredepart) = DATE(@dateheuredepart)";
                 maCde = new MySqlCommand(requete, maCnx);
                 maCde.Parameters.AddWithValue("@noliaison", noLiason);
                 maCde.Parameters.AddWithValue("@dateheuredepart", dateDepart);
@@ -285,15 +288,10 @@ namespace projetAtlantik_Brodie
 
                 while (jeuEnregistrements.Read())
                 {
-                    
-
                     int noTraverse = (int)jeuEnregistrements["notraversee"];
-                    string lettreCategorie = (string)jeuEnregistrements["lettrecategorie"];
                     string heure = (string)jeuEnregistrements["heure"];
                     string nomBateau = (string)jeuEnregistrements["nom"];
 
-                    foreach (Traversees trav in Lestraversees)
-                    {
                         tabItem[0] = noTraverse.ToString();
                         tabItem[1] = heure;
                         tabItem[2] = nomBateau;
@@ -302,7 +300,7 @@ namespace projetAtlantik_Brodie
                         tabItem[5] = (GetCapaciteMaximale(noTraverse, "C") - GetQuantiteEnregistree(noTraverse, "C")).ToString();
 
                         lvAffichageTraversee.Items.Add(new ListViewItem(tabItem));
-                    }
+                    
                 }
                 MessageBox.Show("Voici la liste des traversées");
             }
