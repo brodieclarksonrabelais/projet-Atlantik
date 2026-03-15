@@ -121,7 +121,7 @@ namespace projetAtlantik_Brodie
                 requete = "insert into traversee(noliaison, nobateau, dateheuredepart, dateheurearrivee) values(@noliaison, @nobateau, @dateheuredepart, @dateheurearrivee)";
                 var maCde4 = new MySqlCommand(requete, maCnx);
                 maCde4.Parameters.AddWithValue("@noliaison", ((Liaison)cmbLiaisonTraversee.SelectedItem).GetNoLiaison());
-                maCde4.Parameters.AddWithValue("@nobateau", ((Bateaus)cmbBateauTraversee.SelectedItem).getNoBateau());
+                maCde4.Parameters.AddWithValue("@nobateau", ((Bateaus)cmbBateauTraversee.SelectedItem).GetNoBateau());
                 maCde4.Parameters.AddWithValue("@dateheuredepart", dateDepart.Value);
                 maCde4.Parameters.AddWithValue("@dateheurearrivee", dateArrivee.Value);
                 maCde4.ExecuteNonQuery();

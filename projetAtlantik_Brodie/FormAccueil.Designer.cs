@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAccueil));
             this.menuStripAccueil = new System.Windows.Forms.MenuStrip();
             this.ajouterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unSecteurToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +44,6 @@
             this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lesDétailsPourUneRéservationPourUnClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aProposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblAtlantik = new System.Windows.Forms.Label();
             this.menuStripAccueil.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +57,7 @@
             this.aProposToolStripMenuItem});
             this.menuStripAccueil.Location = new System.Drawing.Point(0, 0);
             this.menuStripAccueil.Name = "menuStripAccueil";
-            this.menuStripAccueil.Size = new System.Drawing.Size(1067, 28);
+            this.menuStripAccueil.Size = new System.Drawing.Size(1209, 28);
             this.menuStripAccueil.TabIndex = 0;
             this.menuStripAccueil.Text = "menuStrip1";
             this.menuStripAccueil.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -154,7 +154,7 @@
             // 
             this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Name = "lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStrip" +
     "MenuItem";
-            this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Size = new System.Drawing.Size(278, 26);
+            this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Text = "Les traversées";
             this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem.Click += new System.EventHandler(this.lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem_Click);
             // 
@@ -171,25 +171,13 @@
             this.aProposToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.aProposToolStripMenuItem.Text = "A Propos";
             // 
-            // lblAtlantik
-            // 
-            this.lblAtlantik.AutoSize = true;
-            this.lblAtlantik.BackColor = System.Drawing.Color.RoyalBlue;
-            this.lblAtlantik.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblAtlantik.Location = new System.Drawing.Point(995, 11);
-            this.lblAtlantik.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblAtlantik.Name = "lblAtlantik";
-            this.lblAtlantik.Size = new System.Drawing.Size(50, 16);
-            this.lblAtlantik.TabIndex = 1;
-            this.lblAtlantik.Text = "Atlantik";
-            this.lblAtlantik.Click += new System.EventHandler(this.label1_Click);
-            // 
             // FormAccueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.lblAtlantik);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1209, 675);
             this.Controls.Add(this.menuStripAccueil);
             this.MainMenuStrip = this.menuStripAccueil;
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -216,7 +204,6 @@
         private System.Windows.Forms.ToolStripMenuItem modifierToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem afficherToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aProposToolStripMenuItem;
-        private System.Windows.Forms.Label lblAtlantik;
         private System.Windows.Forms.ToolStripMenuItem unBatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lesParamètresDuSiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lesTraverséesPourUneLiaisonEtUneDateDonnéeAvecPlaceRestantesParCatégorieToolStripMenuItem;

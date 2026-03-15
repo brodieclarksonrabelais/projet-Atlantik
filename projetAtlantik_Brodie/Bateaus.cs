@@ -17,7 +17,7 @@ namespace projetAtlantik_Brodie
             this.nomBateau = nomBateau;
         }
 
-        public int getNoBateau()
+        public int GetNoBateau()
         {
             return noBateau;
         }

@@ -19,7 +19,7 @@ namespace projetAtlantik_Brodie
             this.prenom = prenom;
         }
 
-        public int getNoClient()
+        public int GetNoClient()
         {
             return noClient;
         }

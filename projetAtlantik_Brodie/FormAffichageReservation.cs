@@ -74,7 +74,7 @@ namespace projetAtlantik_Brodie
             maCnx.Open();
             try
             {
-                int noClient = ((Client)cmbNomReservation.SelectedItem).getNoClient();
+                int noClient = ((Client)cmbNomReservation.SelectedItem).GetNoClient();
                 var tabItem = new string[4];
 
                 requete = "Select noreservation, t.noliaison, t.notraversee, pd.NOM as nomDepart, pa.NOM as nomArrivee, dateheuredepart " +
@@ -122,47 +122,67 @@ namespace projetAtlantik_Brodie
             MySqlConnection maCo;
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             string requête;
-            MySqlCommand maCde;
+            MySqlCommand maCde, maCdeReservation;
 
             try
             {
-
                 maCo.Open();
-                requête = "Select t.lettrecategorie, t.notype, libelle, montanttotal, modereglement" +
-                    "from type t " +
-                    "inner join enregistrer e on (t.notype = e.notype)" +
-                    "inner join reservation r on (e.noreservation = r.noreservation)";
-                maCde = new MySqlCommand(requête, maCo);
+                int noClient = ((Client)cmbNomReservation.SelectedItem).GetNoClient();
+                int noReservation = 0;
+                requête = "Select noreservation from reservation where noclient = @noclient";
+                maCdeReservation = new MySqlCommand(requête, maCo);
+                maCdeReservation.Parameters.AddWithValue("@noclient", noClient);
                 MySqlDataReader jeuEnregistrements;
+                jeuEnregistrements = maCdeReservation.ExecuteReader();
+
+                while (jeuEnregistrements.Read())
+                {
+                    noReservation = Convert.ToInt32(jeuEnregistrements["noreservation"]);
+                }
+                jeuEnregistrements.Close();
+
+                requête = "Select t.lettrecategorie, t.notype, t.libelle, e.quantitereservee, r.montanttotal, r.modereglement from type t inner join enregistrer e on (t.notype = e.notype) inner join reservation r on (e.noreservation = r.noreservation) where r.noreservation = @noreservation order by t.lettrecategorie, t.notype";
+                maCde = new MySqlCommand(requête, maCo);
+                maCde.Parameters.AddWithValue("@noreservation", noReservation);
                 jeuEnregistrements = maCde.ExecuteReader();
 
-                Label lblCategorie;
-                Label lblResultat;
-                Label lblMontant;
                 int i = 0;
+                double montantTotal = 0;
+                string modeReglement = "";
 
                 while (jeuEnregistrements.Read())
                 {
                     string lettreCategorie = jeuEnregistrements["lettrecategorie"].ToString();
                     int noType = Convert.ToInt32(jeuEnregistrements["notype"]);
                     string libelle = jeuEnregistrements["libelle"].ToString();
+                    int quantiteReservee = Convert.ToInt32(jeuEnregistrements["quantitereservee"]);
+                    montantTotal = Convert.ToDouble(jeuEnregistrements["montanttotal"]);
+                    modeReglement = jeuEnregistrements["modereglement"].ToString();
 
+                    if(i == 0)
+                    {
+                        lblMontantAdulte.Text = quantiteReservee.ToString();
+                    }
+                    else if(i == 1)
+                    {
+                        lblMontantJunior.Text = quantiteReservee.ToString();
+                    }
+                    else if(i == 2)
+                    {
+                        lblMontantEnfant.Text = quantiteReservee.ToString();
+                    }
+                    else if(i == 3)
+                    {
+                        lblMontantVoitMoins4.Text = quantiteReservee.ToString();
+                    }
 
-                    i += 2;
-                    lblCategorie = new Label();
-                    lblCategorie.Text = lettreCategorie + noType.ToString() + " - " + libelle + " :";
-                    lblCategorie.Location = new Point(0, i * 15);
-                    gbxReservation.Controls.Add(lblCategorie);
-
-                    lblResultat = new Label();
-                    lblResultat.Tag = lettreCategorie + ";" + noType;
-                    lblResultat.Location = new Point(140, i * 15);
-                    gbxReservation.Controls.Add(lblResultat);
+                    i ++;
                 }
+
                 jeuEnregistrements.Close();
-                
 
-
+                lblMontantResultat.Text = montantTotal.ToString() + " €";
+                lblReglementResultat.Text = modeReglement;
             }
             catch (Exception ex)
             {
@@ -172,6 +192,16 @@ namespace projetAtlantik_Brodie
             {
                 maCo.Close();
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

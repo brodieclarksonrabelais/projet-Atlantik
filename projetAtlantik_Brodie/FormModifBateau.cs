@@ -140,7 +140,7 @@ namespace projetAtlantik_Brodie
             MySqlCommand maCde;
 
             maCnx.Open();
-            int noBateau = ((Bateaus)cmbNomBateau.SelectedItem).getNoBateau();
+            int noBateau = ((Bateaus)cmbNomBateau.SelectedItem).GetNoBateau();
             requete = "Select nobateau from contenir";
             maCde = new MySqlCommand(requete, maCnx);
             MySqlDataReader jeuEnregistrements;
