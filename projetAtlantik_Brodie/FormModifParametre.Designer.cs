@@ -31,14 +31,15 @@
             this.lblSite = new System.Windows.Forms.Label();
             this.lblRang = new System.Windows.Forms.Label();
             this.lblid = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.lblCleHMAC = new System.Windows.Forms.Label();
+            this.tbxSite = new System.Windows.Forms.TextBox();
+            this.tbxRang = new System.Windows.Forms.TextBox();
+            this.tbxID = new System.Windows.Forms.TextBox();
+            this.tbxCleHMAC = new System.Windows.Forms.TextBox();
+            this.tbxMel = new System.Windows.Forms.TextBox();
             this.lblMelSite = new System.Windows.Forms.Label();
             this.btnModifParametres = new System.Windows.Forms.Button();
+            this.cbxEnProduction = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblSite
@@ -46,80 +47,80 @@
             this.lblSite.AutoSize = true;
             this.lblSite.Location = new System.Drawing.Point(58, 38);
             this.lblSite.Name = "lblSite";
-            this.lblSite.Size = new System.Drawing.Size(44, 16);
+            this.lblSite.Size = new System.Drawing.Size(36, 16);
             this.lblSite.TabIndex = 0;
-            this.lblSite.Text = "label1";
+            this.lblSite.Text = "Site :";
             // 
             // lblRang
             // 
             this.lblRang.AutoSize = true;
             this.lblRang.Location = new System.Drawing.Point(58, 90);
             this.lblRang.Name = "lblRang";
-            this.lblRang.Size = new System.Drawing.Size(44, 16);
+            this.lblRang.Size = new System.Drawing.Size(46, 16);
             this.lblRang.TabIndex = 1;
-            this.lblRang.Text = "label2";
+            this.lblRang.Text = "Rang :";
             // 
             // lblid
             // 
             this.lblid.AutoSize = true;
             this.lblid.Location = new System.Drawing.Point(58, 144);
             this.lblid.Name = "lblid";
-            this.lblid.Size = new System.Drawing.Size(44, 16);
+            this.lblid.Size = new System.Drawing.Size(69, 16);
             this.lblid.TabIndex = 2;
-            this.lblid.Text = "label3";
+            this.lblid.Text = "Identifiant :";
             // 
-            // label4
+            // lblCleHMAC
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(58, 200);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 16);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "label4";
+            this.lblCleHMAC.AutoSize = true;
+            this.lblCleHMAC.Location = new System.Drawing.Point(58, 200);
+            this.lblCleHMAC.Name = "lblCleHMAC";
+            this.lblCleHMAC.Size = new System.Drawing.Size(75, 16);
+            this.lblCleHMAC.TabIndex = 3;
+            this.lblCleHMAC.Text = "Clé HMAC :";
             // 
-            // textBox1
+            // tbxSite
             // 
-            this.textBox1.Location = new System.Drawing.Point(215, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 22);
-            this.textBox1.TabIndex = 4;
+            this.tbxSite.Location = new System.Drawing.Point(215, 38);
+            this.tbxSite.Name = "tbxSite";
+            this.tbxSite.Size = new System.Drawing.Size(238, 22);
+            this.tbxSite.TabIndex = 4;
             // 
-            // textBox2
+            // tbxRang
             // 
-            this.textBox2.Location = new System.Drawing.Point(215, 83);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 22);
-            this.textBox2.TabIndex = 5;
+            this.tbxRang.Location = new System.Drawing.Point(215, 83);
+            this.tbxRang.Name = "tbxRang";
+            this.tbxRang.Size = new System.Drawing.Size(100, 22);
+            this.tbxRang.TabIndex = 5;
             // 
-            // textBox3
+            // tbxID
             // 
-            this.textBox3.Location = new System.Drawing.Point(215, 144);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 6;
+            this.tbxID.Location = new System.Drawing.Point(215, 144);
+            this.tbxID.Name = "tbxID";
+            this.tbxID.Size = new System.Drawing.Size(238, 22);
+            this.tbxID.TabIndex = 6;
             // 
-            // textBox4
+            // tbxCleHMAC
             // 
-            this.textBox4.Location = new System.Drawing.Point(215, 200);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 7;
+            this.tbxCleHMAC.Location = new System.Drawing.Point(215, 200);
+            this.tbxCleHMAC.Name = "tbxCleHMAC";
+            this.tbxCleHMAC.Size = new System.Drawing.Size(573, 22);
+            this.tbxCleHMAC.TabIndex = 7;
             // 
-            // textBox5
+            // tbxMel
             // 
-            this.textBox5.Location = new System.Drawing.Point(215, 262);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 22);
-            this.textBox5.TabIndex = 8;
+            this.tbxMel.Location = new System.Drawing.Point(215, 262);
+            this.tbxMel.Name = "tbxMel";
+            this.tbxMel.Size = new System.Drawing.Size(238, 22);
+            this.tbxMel.TabIndex = 8;
             // 
             // lblMelSite
             // 
             this.lblMelSite.AutoSize = true;
             this.lblMelSite.Location = new System.Drawing.Point(61, 262);
             this.lblMelSite.Name = "lblMelSite";
-            this.lblMelSite.Size = new System.Drawing.Size(44, 16);
+            this.lblMelSite.Size = new System.Drawing.Size(59, 16);
             this.lblMelSite.TabIndex = 9;
-            this.lblMelSite.Text = "label5";
+            this.lblMelSite.Text = "Mél site :";
             // 
             // btnModifParametres
             // 
@@ -129,25 +130,39 @@
             this.btnModifParametres.TabIndex = 10;
             this.btnModifParametres.Text = "Modifier";
             this.btnModifParametres.UseVisualStyleBackColor = true;
+            this.btnModifParametres.Click += new System.EventHandler(this.btnModifParametres_Click);
+            // 
+            // cbxEnProduction
+            // 
+            this.cbxEnProduction.AutoSize = true;
+            this.cbxEnProduction.Location = new System.Drawing.Point(215, 318);
+            this.cbxEnProduction.Name = "cbxEnProduction";
+            this.cbxEnProduction.Size = new System.Drawing.Size(111, 20);
+            this.cbxEnProduction.TabIndex = 11;
+            this.cbxEnProduction.Text = "En production";
+            this.cbxEnProduction.UseVisualStyleBackColor = true;
+            this.cbxEnProduction.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // FormModifParametre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbxEnProduction);
             this.Controls.Add(this.btnModifParametres);
             this.Controls.Add(this.lblMelSite);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tbxMel);
+            this.Controls.Add(this.tbxCleHMAC);
+            this.Controls.Add(this.tbxID);
+            this.Controls.Add(this.tbxRang);
+            this.Controls.Add(this.tbxSite);
+            this.Controls.Add(this.lblCleHMAC);
             this.Controls.Add(this.lblid);
             this.Controls.Add(this.lblRang);
             this.Controls.Add(this.lblSite);
             this.Name = "FormModifParametre";
             this.Text = "FormModifParametre";
+            this.Load += new System.EventHandler(this.FormModifParametre_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,13 +173,14 @@
         private System.Windows.Forms.Label lblSite;
         private System.Windows.Forms.Label lblRang;
         private System.Windows.Forms.Label lblid;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label lblCleHMAC;
+        private System.Windows.Forms.TextBox tbxSite;
+        private System.Windows.Forms.TextBox tbxRang;
+        private System.Windows.Forms.TextBox tbxID;
+        private System.Windows.Forms.TextBox tbxCleHMAC;
+        private System.Windows.Forms.TextBox tbxMel;
         private System.Windows.Forms.Label lblMelSite;
         private System.Windows.Forms.Button btnModifParametres;
+        private System.Windows.Forms.CheckBox cbxEnProduction;
     }
 }

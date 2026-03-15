@@ -147,6 +147,7 @@ namespace projetAtlantik_Brodie
                     int noType = Convert.ToInt32(jeuEnregistrements["notype"]);
                     string libelle = jeuEnregistrements["libelle"].ToString();
 
+
                     i += 2;
                     lblCategorie = new Label();
                     lblCategorie.Text = lettreCategorie + noType.ToString() + " - " + libelle + " :";
