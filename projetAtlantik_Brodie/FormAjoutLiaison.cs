@@ -23,7 +23,7 @@ namespace projetAtlantik_Brodie
         private void btnAjoutLiaison_Click(object sender, EventArgs e)
         {
             MySqlConnection maCnx4;
-            maCnx4 = new MySqlConnection("server=localhost;user=root;database=ATLANTIK;port=3306;password=");
+            maCnx4 = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306;password=");
 
             try
             {

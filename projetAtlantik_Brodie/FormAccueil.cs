@@ -46,7 +46,8 @@ namespace projetAtlantik_Brodie
 
         private void lesDétailsPourUneRéservationPourUnClientToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormAffichageReservation formAffichageReservation = new FormAffichageReservation();
+            formAffichageReservation.ShowDialog();
         }
 
         private void unPortToolStripMenuItem_Click(object sender, EventArgs e)
@@ -88,6 +89,12 @@ namespace projetAtlantik_Brodie
         {
             FormAffichageTraversee formAffichageTraversee = new FormAffichageTraversee();
             formAffichageTraversee.ShowDialog();
+        }
+
+        private void lesParamètresDuSiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormModifParametre formModifParametre = new FormModifParametre();
+            formModifParametre.ShowDialog();
         }
     }
 }

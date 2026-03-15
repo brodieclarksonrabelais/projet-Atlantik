@@ -300,9 +300,7 @@ namespace projetAtlantik_Brodie
                         tabItem[5] = (GetCapaciteMaximale(noTraverse, "C") - GetQuantiteEnregistree(noTraverse, "C")).ToString();
 
                         lvAffichageTraversee.Items.Add(new ListViewItem(tabItem));
-                    
                 }
-                MessageBox.Show("Voici la liste des traversées");
             }
             catch (Exception ex)
             {
