@@ -28,18 +28,25 @@ namespace projetAtlantik_Brodie
 
             try
             {
-                double distance = double.Parse(tbxDistance.Text);
-                string requete;
-                maCnx4.Open();
-                requete = "insert into liaison(NOPORT_DEPART,NOSECTEUR, NOPORT_ARRIVEE,DISTANCE) values(@noportdepart,@nosecteur,@noportarrivee,@distance)";
-                var maCde4 = new MySqlCommand(requete, maCnx4);
-                maCde4.Parameters.AddWithValue("@nosecteur", ((Secteurs)lbxSecteurs.SelectedItem).GetNosecteur());
-                maCde4.Parameters.AddWithValue("@noportdepart", ((Ports)cmbDepart.SelectedItem).GetNoPorts());
-                maCde4.Parameters.AddWithValue("@noportarrivee", ((Ports)cmbArrivee.SelectedItem).GetNoPorts());
-                maCde4.Parameters.AddWithValue("@distance", distance);
-                maCde4.ExecuteNonQuery();
+                if(lbxSecteurs.SelectedItems == null || cmbDepart.SelectedItem == null || cmbArrivee.SelectedItem == null)
+                {
+                    MessageBox.Show("isduzegu");
+                } 
+                else
+                {
+                    double distance = double.Parse(tbxDistance.Text);
+                    string requete;
+                    maCnx4.Open();
+                    requete = "insert into liaison(NOPORT_DEPART,NOSECTEUR, NOPORT_ARRIVEE,DISTANCE) values(@noportdepart,@nosecteur,@noportarrivee,@distance)";
+                    var maCde4 = new MySqlCommand(requete, maCnx4);
+                    maCde4.Parameters.AddWithValue("@nosecteur", ((Secteurs)lbxSecteurs.SelectedItem).GetNosecteur());
+                    maCde4.Parameters.AddWithValue("@noportdepart", ((Ports)cmbDepart.SelectedItem).GetNoPorts());
+                    maCde4.Parameters.AddWithValue("@noportarrivee", ((Ports)cmbArrivee.SelectedItem).GetNoPorts());
+                    maCde4.Parameters.AddWithValue("@distance", distance);
+                    maCde4.ExecuteNonQuery();
 
-                MessageBox.Show("La liaison à été ajouté avec succès.");
+                    MessageBox.Show("La liaison à été ajouté avec succès.");
+                }
             }
             catch (MySqlException ex)
             {
