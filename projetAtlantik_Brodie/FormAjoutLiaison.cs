@@ -30,7 +30,7 @@ namespace projetAtlantik_Brodie
             {
                 if(lbxSecteurs.SelectedItems == null || cmbDepart.SelectedItem == null || cmbArrivee.SelectedItem == null)
                 {
-                    MessageBox.Show("isduzegu");
+                    MessageBox.Show("Sélectionnez un secteur, une date de départ et une date d'arrivée");
                 } 
                 else
                 {
@@ -68,13 +68,7 @@ namespace projetAtlantik_Brodie
             MySqlConnection maCo;
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             string requête;
-            MySqlCommand maCde;
-            MySqlConnection maCo2;
-            maCo2 = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
-            MySqlCommand maCde2;
-            MySqlConnection maCo3;
-            maCo3 = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
-            MySqlCommand maCde3;
+            MySqlCommand maCde, maCde2, maCde3;
 
             try
             {
@@ -95,9 +89,9 @@ namespace projetAtlantik_Brodie
 
                 int noPortsDepart;
                 string nomPortsDepart;
-                maCo2.Open();
+                maCo.Open();
                 requête = "Select * from port";
-                maCde2 = new MySqlCommand(requête, maCo2);
+                maCde2 = new MySqlCommand(requête, maCo);
                 jeuEnregistrements = maCde2.ExecuteReader();
                 while (jeuEnregistrements.Read())
                 {
@@ -109,9 +103,9 @@ namespace projetAtlantik_Brodie
 
                 int noPortsArrivee;
                 string nomPortsArrivee;
-                maCo3.Open();
+                maCo.Open();
                 requête = "Select * from port";
-                maCde3 = new MySqlCommand(requête, maCo3);
+                maCde3 = new MySqlCommand(requête, maCo);
                 jeuEnregistrements = maCde3.ExecuteReader();
                 while (jeuEnregistrements.Read())
                 {
@@ -128,8 +122,6 @@ namespace projetAtlantik_Brodie
             finally
             {
                 maCo.Close();
-                maCo2.Close();
-                maCo3.Close();
             }
         }
 

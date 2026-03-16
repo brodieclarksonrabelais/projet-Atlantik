@@ -142,46 +142,56 @@ namespace projetAtlantik_Brodie
             MySqlCommand maCde;
 
             maCnx.Open();
-            int noBateau = ((Bateaus)cmbNomBateau.SelectedItem).GetNoBateau();
-            requete = "Select nobateau from contenir";
-            maCde = new MySqlCommand(requete, maCnx);
-            MySqlDataReader jeuEnregistrements;
-            jeuEnregistrements = maCde.ExecuteReader();
-            while (jeuEnregistrements.Read())
-            {
-                noBateau = Convert.ToInt32(jeuEnregistrements["nobateau"]);
-            }
-            maCnx.Close();
+            
 
             try
             {
                 maCnx.Open();
-                string nom = cmbNomBateau.Text;
 
-                foreach (Control c in gbxCapaciteMaxModif.Controls)
+                if (cmbNomBateau.SelectedItem == null)
                 {
-                    if (c is TextBox tbxCategorie)
-                    {
-
-                        TextBox txt = (TextBox)c;
-
-                        string tableau;
-                        tableau = (txt.Tag).ToString();
-                        tableau.Split(';');
-
-                        string lettreCategorie = tableau[0].ToString();
-                        int capaciteMax = int.Parse(txt.Text);
-
-                        requete = "Update contenir set capacitemax = @capacitemax where lettrecategorie = @lettrecategorie and nobateau = @nobateau";
-                        var maCde2 = new MySqlCommand(requete, maCnx);
-                        maCde2.Parameters.AddWithValue("@capacitemax", capaciteMax);
-                        maCde2.Parameters.AddWithValue("@lettrecategorie", lettreCategorie);
-                        maCde2.Parameters.AddWithValue("@nobateau", noBateau);
-                        maCde2.ExecuteNonQuery();
-
-                    }
+                    MessageBox.Show("Sélectionnez un bateau");
                 }
-                MessageBox.Show("Votre bateau a été modifié avec succès");
+                else
+                {
+                    int noBateau = ((Bateaus)cmbNomBateau.SelectedItem).GetNoBateau();
+                    requete = "Select nobateau from contenir";
+                    maCde = new MySqlCommand(requete, maCnx);
+                    MySqlDataReader jeuEnregistrements;
+                    jeuEnregistrements = maCde.ExecuteReader();
+                    while (jeuEnregistrements.Read())
+                    {
+                        noBateau = Convert.ToInt32(jeuEnregistrements["nobateau"]);
+                    }
+                    maCnx.Close();
+
+                    string nom = cmbNomBateau.Text;
+
+                    foreach (Control c in gbxCapaciteMaxModif.Controls)
+                    {
+                        if (c is TextBox tbxCategorie)
+                        {
+
+                            TextBox txt = (TextBox)c;
+
+                            string tableau;
+                            tableau = (txt.Tag).ToString();
+                            tableau.Split(';');
+
+                            string lettreCategorie = tableau[0].ToString();
+                            int capaciteMax = int.Parse(txt.Text);
+
+                            requete = "Update contenir set capacitemax = @capacitemax where lettrecategorie = @lettrecategorie and nobateau = @nobateau";
+                            var maCde2 = new MySqlCommand(requete, maCnx);
+                            maCde2.Parameters.AddWithValue("@capacitemax", capaciteMax);
+                            maCde2.Parameters.AddWithValue("@lettrecategorie", lettreCategorie);
+                            maCde2.Parameters.AddWithValue("@nobateau", noBateau);
+                            maCde2.ExecuteNonQuery();
+
+                        }
+                    }
+                    MessageBox.Show("Votre bateau a été modifié avec succès");
+                }
             }
             catch (Exception ex)
             {

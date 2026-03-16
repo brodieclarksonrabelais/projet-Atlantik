@@ -118,14 +118,22 @@ namespace projetAtlantik_Brodie
             maCnx.Open();
             try
             {
-                requete = "insert into traversee(noliaison, nobateau, dateheuredepart, dateheurearrivee) values(@noliaison, @nobateau, @dateheuredepart, @dateheurearrivee)";
-                var maCde4 = new MySqlCommand(requete, maCnx);
-                maCde4.Parameters.AddWithValue("@noliaison", ((Liaison)cmbLiaisonTraversee.SelectedItem).GetNoLiaison());
-                maCde4.Parameters.AddWithValue("@nobateau", ((Bateaus)cmbBateauTraversee.SelectedItem).GetNoBateau());
-                maCde4.Parameters.AddWithValue("@dateheuredepart", dateDepart.Value);
-                maCde4.Parameters.AddWithValue("@dateheurearrivee", dateArrivee.Value);
-                maCde4.ExecuteNonQuery();
-                MessageBox.Show("Votre traversee a été ajouté avec succès");
+                if (lbxSecteursTraversee.SelectedItem == null || cmbLiaisonTraversee.SelectedItem == null || cmbBateauTraversee == null || dateDepart == null || dateArrivee == null)
+                {
+                    MessageBox.Show("Sélectionnez un secteur, une liaison, un bateau, une date et une heure de départ, une date et une heure d'arrivée");
+                    return;
+                }
+                else
+                {
+                    requete = "insert into traversee(noliaison, nobateau, dateheuredepart, dateheurearrivee) values(@noliaison, @nobateau, @dateheuredepart, @dateheurearrivee)";
+                    var maCde4 = new MySqlCommand(requete, maCnx);
+                    maCde4.Parameters.AddWithValue("@noliaison", ((Liaison)cmbLiaisonTraversee.SelectedItem).GetNoLiaison());
+                    maCde4.Parameters.AddWithValue("@nobateau", ((Bateaus)cmbBateauTraversee.SelectedItem).GetNoBateau());
+                    maCde4.Parameters.AddWithValue("@dateheuredepart", dateDepart.Value);
+                    maCde4.Parameters.AddWithValue("@dateheurearrivee", dateArrivee.Value);
+                    maCde4.ExecuteNonQuery();
+                    MessageBox.Show("Votre traversee a été ajouté avec succès");
+                }
             }
             catch (Exception ex)
             {
