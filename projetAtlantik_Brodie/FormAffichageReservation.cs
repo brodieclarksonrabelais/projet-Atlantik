@@ -141,7 +141,11 @@ namespace projetAtlantik_Brodie
                 }
                 jeuEnregistrements.Close();
 
-                requête = "Select t.lettrecategorie, t.notype, t.libelle, e.quantitereservee, r.montanttotal, r.modereglement from type t inner join enregistrer e on (t.notype = e.notype) inner join reservation r on (e.noreservation = r.noreservation) where r.noreservation = @noreservation order by t.lettrecategorie, t.notype";
+                requête = "SELECT * from enregistrer e " +
+                            "inner join type t on e.NOTYPE = t.NOTYPE " +
+                            "inner join reservation r on  e.NORESERVATION = r.NORESERVATION " +
+                            "where t.LETTRECATEGORIE= e.LETTRECATEGORIE and e.NOTYPE = t.NOTYPE " +
+                            "and e.NORESERVATION = @noreservation";
                 maCde = new MySqlCommand(requête, maCo);
                 maCde.Parameters.AddWithValue("@noreservation", noReservation);
                 jeuEnregistrements = maCde.ExecuteReader();

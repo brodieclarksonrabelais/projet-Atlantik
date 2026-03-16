@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -69,8 +70,6 @@ namespace projetAtlantik_Brodie
 
                 while (jeuEnregistrements.Read())
                 {
-                    
-
                     string lettreCategorie = jeuEnregistrements["lettrecategorie"].ToString();
                     int noType = Convert.ToInt32(jeuEnregistrements["notype"]);
                     string libelle = jeuEnregistrements["libelle"].ToString();
@@ -82,8 +81,22 @@ namespace projetAtlantik_Brodie
                     gbxCategorieTarif.Controls.Add(lblCategorie);
 
                     tbxCategorie = new TextBox();
+                    var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
+                    var resultatTest = objetRegEx.Match(tbxCategorie.Text);
+
                     tbxCategorie.Tag = lettreCategorie + ";" + noType; 
                     tbxCategorie.Location = new Point(200, i * 15);
+
+                    if (!resultatTest.Success)
+                    {
+                        tbxCategorie.BackColor = Color.Red;
+                        btnAjoutTarif.Enabled = false;
+                    }
+                    else
+                    {
+                        btnAjoutTarif.Enabled = true;
+                        tbxCategorie.BackColor = Color.Green;
+                    }
                     gbxCategorieTarif.Controls.Add(tbxCategorie);
                 }
                 jeuEnregistrements.Close();
@@ -199,6 +212,11 @@ namespace projetAtlantik_Brodie
             {
                 maCnx.Close();
             }
+        }
+
+        private void gbxCategorieTarif_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

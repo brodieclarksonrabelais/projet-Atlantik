@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -54,7 +55,32 @@ namespace projetAtlantik_Brodie
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
+            var resultatTest = objetRegEx.Match(tbxAjoutPort.Text);
 
+            if (!resultatTest.Success)
+            {
+                tbxAjoutPort.BackColor = Color.Red;
+                btnAjoutPort.Enabled = false;
+            }
+            else
+            {
+                tbxAjoutPort.BackColor = Color.Green;
+                btnAjoutPort.Enabled = true;
+            }
+        }
+
+        private void tbxAjoutPort_Validating(object sender, CancelEventArgs e)
+        {
+            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
+            var resultatTest = objetRegEx.Match(tbxAjoutPort.Text);
+
+            if (!resultatTest.Success)
+            {
+                MessageBox.Show("Format incorrect");
+                tbxAjoutPort.BackColor = Color.Red;
+
+            }
         }
     }
 }

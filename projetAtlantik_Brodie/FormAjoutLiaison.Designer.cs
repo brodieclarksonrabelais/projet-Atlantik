@@ -48,6 +48,7 @@
             this.btnAjoutLiaison.Text = "Ajouter";
             this.btnAjoutLiaison.UseVisualStyleBackColor = true;
             this.btnAjoutLiaison.Click += new System.EventHandler(this.btnAjoutLiaison_Click);
+            this.btnAjoutLiaison.Validating += new System.ComponentModel.CancelEventHandler(this.btnAjoutLiaison_Validating);
             // 
             // lbxSecteurs
             // 
@@ -115,6 +116,7 @@
             this.tbxDistance.Name = "tbxDistance";
             this.tbxDistance.Size = new System.Drawing.Size(100, 20);
             this.tbxDistance.TabIndex = 8;
+            this.tbxDistance.TextChanged += new System.EventHandler(this.tbxDistance_TextChanged);
             // 
             // FormAjoutLiaison
             // 

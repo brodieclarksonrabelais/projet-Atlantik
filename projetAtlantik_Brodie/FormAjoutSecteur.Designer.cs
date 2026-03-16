@@ -49,6 +49,8 @@
             this.tbxAjoutSecteur.Name = "tbxAjoutSecteur";
             this.tbxAjoutSecteur.Size = new System.Drawing.Size(100, 20);
             this.tbxAjoutSecteur.TabIndex = 1;
+            this.tbxAjoutSecteur.TextChanged += new System.EventHandler(this.tbxAjoutSecteur_TextChanged);
+            this.tbxAjoutSecteur.Validating += new System.ComponentModel.CancelEventHandler(this.tbxAjoutSecteur_Validating);
             // 
             // lblAjoutSecteur
             // 
@@ -70,6 +72,7 @@
             this.Controls.Add(this.btnAjoutSecteur);
             this.Name = "FormAjoutSecteur";
             this.Text = "FormAjoutSecteur";
+            this.Load += new System.EventHandler(this.FormAjoutSecteur_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

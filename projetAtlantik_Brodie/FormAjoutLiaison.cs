@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
@@ -122,6 +123,36 @@ namespace projetAtlantik_Brodie
                 maCo.Close();
                 maCo2.Close();
                 maCo3.Close();
+            }
+        }
+
+        private void tbxDistance_TextChanged(object sender, EventArgs e)
+        {
+            var objetRegEx = new Regex("^[0-9]*$");
+            var resultatTest = objetRegEx.Match(tbxDistance.Text);
+
+            if (!resultatTest.Success)
+            {
+                tbxDistance.BackColor = Color.Red;
+                btnAjoutLiaison.Enabled = false;
+            }
+            else
+            {
+                tbxDistance.BackColor = Color.Green;
+                btnAjoutLiaison.Enabled = true;
+            }
+        }
+
+        private void btnAjoutLiaison_Validating(object sender, CancelEventArgs e)
+        {
+            var objetRegEx = new Regex("^[0-9]*$");
+            var resultatTest = objetRegEx.Match(tbxDistance.Text);
+
+            if (!resultatTest.Success)
+            {
+                MessageBox.Show("Format incorrect");
+                tbxDistance.BackColor = Color.Red;
+
             }
         }
     }

@@ -102,6 +102,7 @@
             this.gbxCategorieTarif.TabIndex = 6;
             this.gbxCategorieTarif.TabStop = false;
             this.gbxCategorieTarif.Text = "Catégories";
+            this.gbxCategorieTarif.TextChanged += new System.EventHandler(this.gbxCategorieTarif_TextChanged);
             // 
             // lblTarif
             // 

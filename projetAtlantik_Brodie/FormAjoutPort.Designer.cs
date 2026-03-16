@@ -50,6 +50,7 @@
             this.tbxAjoutPort.Size = new System.Drawing.Size(100, 20);
             this.tbxAjoutPort.TabIndex = 1;
             this.tbxAjoutPort.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tbxAjoutPort.Validating += new System.ComponentModel.CancelEventHandler(this.tbxAjoutPort_Validating);
             // 
             // lblAjoutPort
             // 

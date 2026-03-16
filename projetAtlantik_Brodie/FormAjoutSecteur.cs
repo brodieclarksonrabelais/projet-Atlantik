@@ -6,8 +6,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace projetAtlantik_Brodie
 {
@@ -44,6 +46,41 @@ namespace projetAtlantik_Brodie
             finally
             {
                 maCo.Close();
+            }
+        }
+
+        private void FormAjoutSecteur_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbxAjoutSecteur_Validating(object sender, CancelEventArgs e)
+        {
+            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
+            var resultatTest = objetRegEx.Match(tbxAjoutSecteur.Text);
+
+            if (!resultatTest.Success)
+            {
+                MessageBox.Show("Format incorrect");
+                tbxAjoutSecteur.BackColor = Color.Red;
+                
+            }
+        }
+
+        private void tbxAjoutSecteur_TextChanged(object sender, EventArgs e)
+        {
+            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
+            var resultatTest = objetRegEx.Match(tbxAjoutSecteur.Text);
+
+            if (!resultatTest.Success)
+            {
+                tbxAjoutSecteur.BackColor = Color.Red;
+                btnAjoutSecteur.Enabled = false;
+            }
+            else
+            {
+                tbxAjoutSecteur.BackColor = Color.Green;
+                btnAjoutSecteur.Enabled = true;
             }
         }
     }
