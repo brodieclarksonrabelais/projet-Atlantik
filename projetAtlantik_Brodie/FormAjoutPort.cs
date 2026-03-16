@@ -65,7 +65,7 @@ namespace projetAtlantik_Brodie
             }
             else
             {
-                tbxAjoutPort.BackColor = Color.Green;
+                tbxAjoutPort.BackColor = Color.White;
                 btnAjoutPort.Enabled = true;
             }
         }

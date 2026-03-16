@@ -79,7 +79,7 @@ namespace projetAtlantik_Brodie
             }
             else
             {
-                tbxAjoutSecteur.BackColor = Color.Green;
+                tbxAjoutSecteur.BackColor = Color.White;
                 btnAjoutSecteur.Enabled = true;
             }
         }

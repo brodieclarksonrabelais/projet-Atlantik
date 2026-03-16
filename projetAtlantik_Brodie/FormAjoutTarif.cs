@@ -86,18 +86,9 @@ namespace projetAtlantik_Brodie
 
                     tbxCategorie.Tag = lettreCategorie + ";" + noType; 
                     tbxCategorie.Location = new Point(200, i * 15);
-
-                    if (!resultatTest.Success)
-                    {
-                        tbxCategorie.BackColor = Color.Red;
-                        btnAjoutTarif.Enabled = false;
-                    }
-                    else
-                    {
-                        btnAjoutTarif.Enabled = true;
-                        tbxCategorie.BackColor = Color.Green;
-                    }
+                    tbxCategorie.TextChanged += tbxCategorie_TextChanged;
                     gbxCategorieTarif.Controls.Add(tbxCategorie);
+
                 }
                 jeuEnregistrements.Close();
 
@@ -217,6 +208,24 @@ namespace projetAtlantik_Brodie
         private void gbxCategorieTarif_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void tbxCategorie_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tbx = (TextBox)sender;
+            var objetRegEx = new Regex("^[0-9]*$");
+            var resultatTest = objetRegEx.Match(tbx.Text);
+
+            if (!resultatTest.Success)
+            {
+                tbx.BackColor = Color.Red;
+                btnAjoutTarif.Enabled = false;
+            }
+            else
+            {
+                tbx.BackColor = Color.White;
+                btnAjoutTarif.Enabled = true;
+            }
         }
     }
 }

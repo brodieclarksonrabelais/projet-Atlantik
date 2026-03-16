@@ -49,6 +49,8 @@
             this.tbxNomBateau.Name = "tbxNomBateau";
             this.tbxNomBateau.Size = new System.Drawing.Size(135, 20);
             this.tbxNomBateau.TabIndex = 1;
+            this.tbxNomBateau.TextChanged += new System.EventHandler(this.tbxNomBateau_TextChanged);
+            this.tbxNomBateau.Validating += new System.ComponentModel.CancelEventHandler(this.tbxNomBateau_Validating);
             // 
             // btnAjoutBateau
             // 

@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -101,6 +102,47 @@ namespace projetAtlantik_Brodie
             finally
             {
                 maCnx.Close();
+            }
+        }
+
+        private void tbxSite_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void tbxRang_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void tbxMel_Validating(object sender, CancelEventArgs e)
+        {
+            var objetRegEx = new Regex(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$");
+            var resultatTest = objetRegEx.Match(tbxMel.Text);
+
+            if (!resultatTest.Success)
+            {
+                MessageBox.Show("Format incorrect");
+                tbxMel.BackColor = Color.Red;
+
+            }
+        }
+
+        private void tbxMel_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tbx = (TextBox)sender;
+            var objetRegEx = new Regex(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$");
+            var resultatTest = objetRegEx.Match(tbx.Text);
+
+            if (!resultatTest.Success)
+            {
+                tbx.BackColor = Color.Red;
+                btnModifParametres.Enabled = false;
+            }
+            else
+            {
+                tbx.BackColor = Color.White;
+                btnModifParametres.Enabled = true;
             }
         }
     }

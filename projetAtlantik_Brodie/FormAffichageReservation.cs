@@ -163,24 +163,15 @@ namespace projetAtlantik_Brodie
                     montantTotal = Convert.ToDouble(jeuEnregistrements["montanttotal"]);
                     modeReglement = jeuEnregistrements["modereglement"].ToString();
 
-                    if(i == 0)
-                    {
-                        lblMontantAdulte.Text = quantiteReservee.ToString();
-                    }
-                    else if(i == 1)
-                    {
-                        lblMontantJunior.Text = quantiteReservee.ToString();
-                    }
-                    else if(i == 2)
-                    {
-                        lblMontantEnfant.Text = quantiteReservee.ToString();
-                    }
-                    else if(i == 3)
-                    {
-                        lblMontantVoitMoins4.Text = quantiteReservee.ToString();
-                    }
-
-                    i ++;
+                    Label[] labels =
+                        {
+                            lblMontantAdulte,
+                            lblMontantJunior,
+                            lblMontantEnfant,
+                            lblMontantVoitMoins4
+                        };
+                    labels[i].Text = quantiteReservee.ToString();
+                    i++;
                 }
 
                 jeuEnregistrements.Close();

@@ -138,7 +138,7 @@ namespace projetAtlantik_Brodie
             }
             else
             {
-                tbxDistance.BackColor = Color.Green;
+                tbxDistance.BackColor = Color.White;
                 btnAjoutLiaison.Enabled = true;
             }
         }

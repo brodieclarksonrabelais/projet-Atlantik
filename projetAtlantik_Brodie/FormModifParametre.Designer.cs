@@ -45,88 +45,103 @@
             // lblSite
             // 
             this.lblSite.AutoSize = true;
-            this.lblSite.Location = new System.Drawing.Point(58, 38);
+            this.lblSite.Location = new System.Drawing.Point(44, 31);
+            this.lblSite.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSite.Name = "lblSite";
-            this.lblSite.Size = new System.Drawing.Size(36, 16);
+            this.lblSite.Size = new System.Drawing.Size(31, 13);
             this.lblSite.TabIndex = 0;
             this.lblSite.Text = "Site :";
             // 
             // lblRang
             // 
             this.lblRang.AutoSize = true;
-            this.lblRang.Location = new System.Drawing.Point(58, 90);
+            this.lblRang.Location = new System.Drawing.Point(44, 73);
+            this.lblRang.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRang.Name = "lblRang";
-            this.lblRang.Size = new System.Drawing.Size(46, 16);
+            this.lblRang.Size = new System.Drawing.Size(39, 13);
             this.lblRang.TabIndex = 1;
             this.lblRang.Text = "Rang :";
             // 
             // lblid
             // 
             this.lblid.AutoSize = true;
-            this.lblid.Location = new System.Drawing.Point(58, 144);
+            this.lblid.Location = new System.Drawing.Point(44, 117);
+            this.lblid.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblid.Name = "lblid";
-            this.lblid.Size = new System.Drawing.Size(69, 16);
+            this.lblid.Size = new System.Drawing.Size(59, 13);
             this.lblid.TabIndex = 2;
             this.lblid.Text = "Identifiant :";
             // 
             // lblCleHMAC
             // 
             this.lblCleHMAC.AutoSize = true;
-            this.lblCleHMAC.Location = new System.Drawing.Point(58, 200);
+            this.lblCleHMAC.Location = new System.Drawing.Point(44, 162);
+            this.lblCleHMAC.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCleHMAC.Name = "lblCleHMAC";
-            this.lblCleHMAC.Size = new System.Drawing.Size(75, 16);
+            this.lblCleHMAC.Size = new System.Drawing.Size(62, 13);
             this.lblCleHMAC.TabIndex = 3;
             this.lblCleHMAC.Text = "Clé HMAC :";
             // 
             // tbxSite
             // 
-            this.tbxSite.Location = new System.Drawing.Point(215, 38);
+            this.tbxSite.Location = new System.Drawing.Point(161, 31);
+            this.tbxSite.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbxSite.Name = "tbxSite";
-            this.tbxSite.Size = new System.Drawing.Size(238, 22);
+            this.tbxSite.Size = new System.Drawing.Size(180, 20);
             this.tbxSite.TabIndex = 4;
+            this.tbxSite.Validating += new System.ComponentModel.CancelEventHandler(this.tbxSite_Validating);
             // 
             // tbxRang
             // 
-            this.tbxRang.Location = new System.Drawing.Point(215, 83);
+            this.tbxRang.Location = new System.Drawing.Point(161, 67);
+            this.tbxRang.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbxRang.Name = "tbxRang";
-            this.tbxRang.Size = new System.Drawing.Size(100, 22);
+            this.tbxRang.Size = new System.Drawing.Size(76, 20);
             this.tbxRang.TabIndex = 5;
+            this.tbxRang.Validating += new System.ComponentModel.CancelEventHandler(this.tbxRang_Validating);
             // 
             // tbxID
             // 
-            this.tbxID.Location = new System.Drawing.Point(215, 144);
+            this.tbxID.Location = new System.Drawing.Point(161, 117);
+            this.tbxID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbxID.Name = "tbxID";
-            this.tbxID.Size = new System.Drawing.Size(238, 22);
+            this.tbxID.Size = new System.Drawing.Size(180, 20);
             this.tbxID.TabIndex = 6;
             // 
             // tbxCleHMAC
             // 
-            this.tbxCleHMAC.Location = new System.Drawing.Point(215, 200);
+            this.tbxCleHMAC.Location = new System.Drawing.Point(161, 162);
+            this.tbxCleHMAC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbxCleHMAC.Name = "tbxCleHMAC";
-            this.tbxCleHMAC.Size = new System.Drawing.Size(573, 22);
+            this.tbxCleHMAC.Size = new System.Drawing.Size(431, 20);
             this.tbxCleHMAC.TabIndex = 7;
             // 
             // tbxMel
             // 
-            this.tbxMel.Location = new System.Drawing.Point(215, 262);
+            this.tbxMel.Location = new System.Drawing.Point(161, 213);
+            this.tbxMel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbxMel.Name = "tbxMel";
-            this.tbxMel.Size = new System.Drawing.Size(238, 22);
+            this.tbxMel.Size = new System.Drawing.Size(180, 20);
             this.tbxMel.TabIndex = 8;
+            this.tbxMel.TextChanged += new System.EventHandler(this.tbxMel_TextChanged);
+            this.tbxMel.Validating += new System.ComponentModel.CancelEventHandler(this.tbxMel_Validating);
             // 
             // lblMelSite
             // 
             this.lblMelSite.AutoSize = true;
-            this.lblMelSite.Location = new System.Drawing.Point(61, 262);
+            this.lblMelSite.Location = new System.Drawing.Point(46, 213);
+            this.lblMelSite.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMelSite.Name = "lblMelSite";
-            this.lblMelSite.Size = new System.Drawing.Size(59, 16);
+            this.lblMelSite.Size = new System.Drawing.Size(49, 13);
             this.lblMelSite.TabIndex = 9;
             this.lblMelSite.Text = "Mél site :";
             // 
             // btnModifParametres
             // 
-            this.btnModifParametres.Location = new System.Drawing.Point(343, 374);
+            this.btnModifParametres.Location = new System.Drawing.Point(257, 304);
+            this.btnModifParametres.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnModifParametres.Name = "btnModifParametres";
-            this.btnModifParametres.Size = new System.Drawing.Size(75, 23);
+            this.btnModifParametres.Size = new System.Drawing.Size(56, 19);
             this.btnModifParametres.TabIndex = 10;
             this.btnModifParametres.Text = "Modifier";
             this.btnModifParametres.UseVisualStyleBackColor = true;
@@ -135,9 +150,10 @@
             // cbxEnProduction
             // 
             this.cbxEnProduction.AutoSize = true;
-            this.cbxEnProduction.Location = new System.Drawing.Point(215, 318);
+            this.cbxEnProduction.Location = new System.Drawing.Point(161, 258);
+            this.cbxEnProduction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbxEnProduction.Name = "cbxEnProduction";
-            this.cbxEnProduction.Size = new System.Drawing.Size(111, 20);
+            this.cbxEnProduction.Size = new System.Drawing.Size(92, 17);
             this.cbxEnProduction.TabIndex = 11;
             this.cbxEnProduction.Text = "En production";
             this.cbxEnProduction.UseVisualStyleBackColor = true;
@@ -145,9 +161,9 @@
             // 
             // FormModifParametre
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.cbxEnProduction);
             this.Controls.Add(this.btnModifParametres);
             this.Controls.Add(this.lblMelSite);
@@ -160,6 +176,7 @@
             this.Controls.Add(this.lblid);
             this.Controls.Add(this.lblRang);
             this.Controls.Add(this.lblSite);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormModifParametre";
             this.Text = "FormModifParametre";
             this.Load += new System.EventHandler(this.FormModifParametre_Load);

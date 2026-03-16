@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
@@ -34,7 +35,7 @@ namespace projetAtlantik_Brodie
                 int noBateau;
                 string nomBateau;
                 maCo.Open();
-                
+
                 requête = "Select * from bateau";
                 maCde = new MySqlCommand(requête, maCo);
                 MySqlDataReader jeuEnregistrements;
@@ -59,7 +60,7 @@ namespace projetAtlantik_Brodie
                 {
                     string lettreCategorie = jeuEnregistrements["lettrecategorie"].ToString();
                     string libelle = jeuEnregistrements["libelle"].ToString();
-                    
+
 
                     i += 2;
                     lblCategorie = new Label();
@@ -70,6 +71,7 @@ namespace projetAtlantik_Brodie
                     tbxCategorie = new TextBox();
                     tbxCategorie.Tag = lettreCategorie;
                     tbxCategorie.Location = new Point(200, i * 15);
+                    tbxCategorie.TextChanged += tbxCapacite_TextChanged;
                     gbxCapaciteMaxModif.Controls.Add(tbxCategorie);
                 }
                 jeuEnregistrements.Close();
@@ -188,6 +190,24 @@ namespace projetAtlantik_Brodie
             finally
             {
                 maCnx.Close();
+            }
+        }
+
+        private void tbxCapacite_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tbx = (TextBox)sender;
+            var objetRegEx = new Regex("^[0-9]*$");
+            var resultatTest = objetRegEx.Match(tbx.Text);
+
+            if (!resultatTest.Success)
+            {
+                tbx.BackColor = Color.Red;
+                btnModifierBateau.Enabled = false;
+            }
+            else
+            {
+                tbx.BackColor = Color.White;
+                btnModifierBateau.Enabled = true;
             }
         }
     }

@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
@@ -53,6 +54,7 @@ namespace projetAtlantik_Brodie
                     tbxCategorie = new TextBox();
                     tbxCategorie.Tag = lettreCategorie + ";";
                     tbxCategorie.Location = new Point(200, i * 15);
+                    tbxCategorie.TextChanged += tbxCapacite_TextChanged;
                     gbxCapacites.Controls.Add(tbxCategorie);
                 }
                 jeuEnregistrements.Close();
@@ -115,6 +117,55 @@ namespace projetAtlantik_Brodie
             finally
             {
                 maCnx.Close();
+            }
+        }
+
+        private void tbxCapacite_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tbx = (TextBox)sender;
+            var objetRegEx = new Regex("^[0-9]*$");
+            var resultatTest = objetRegEx.Match(tbx.Text);
+
+            if (!resultatTest.Success)
+            {
+                tbx.BackColor = Color.Red;
+                btnAjoutBateau.Enabled = false;
+            }
+            else
+            {
+                tbx.BackColor = Color.White;
+                btnAjoutBateau.Enabled = true;
+            }
+        }
+
+        private void tbxNomBateau_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tbx = (TextBox)sender;
+            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
+            var resultatTest = objetRegEx.Match(tbx.Text);
+
+            if (!resultatTest.Success)
+            {
+                tbx.BackColor = Color.Red;
+                btnAjoutBateau.Enabled = false;
+            }
+            else
+            {
+                tbx.BackColor = Color.White;
+                btnAjoutBateau.Enabled = true;
+            }
+        }
+
+        private void tbxNomBateau_Validating(object sender, CancelEventArgs e)
+        {
+            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
+            var resultatTest = objetRegEx.Match(tbxNomBateau.Text);
+
+            if (!resultatTest.Success)
+            {
+                MessageBox.Show("Format incorrect");
+                tbxNomBateau.BackColor = Color.Red;
+
             }
         }
     }
