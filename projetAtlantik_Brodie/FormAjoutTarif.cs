@@ -227,5 +227,10 @@ namespace projetAtlantik_Brodie
                 btnAjoutTarif.Enabled = true;
             }
         }
+
+        private void gbxCategorieTarif_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }

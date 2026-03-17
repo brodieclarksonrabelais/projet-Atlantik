@@ -103,6 +103,7 @@
             this.gbxCategorieTarif.TabStop = false;
             this.gbxCategorieTarif.Text = "Catégories";
             this.gbxCategorieTarif.TextChanged += new System.EventHandler(this.gbxCategorieTarif_TextChanged);
+            this.gbxCategorieTarif.Validating += new System.ComponentModel.CancelEventHandler(this.gbxCategorieTarif_Validating);
             // 
             // lblTarif
             // 
