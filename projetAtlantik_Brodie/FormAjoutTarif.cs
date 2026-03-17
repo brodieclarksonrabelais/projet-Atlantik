@@ -163,34 +163,43 @@ namespace projetAtlantik_Brodie
             try
             {
                 maCnx.Open();
-                foreach (Control c in gbxCategorieTarif.Controls)
+                if (cmbLiaisonTarif.SelectedItem == null || cmbPeriodeTarif.SelectedItem == null || lbxSecteurTarif == null)
                 {
-                    if(c is TextBox tbxCategorie)
+                    MessageBox.Show("Sélectionnez un secteur, une période et une liaison");
+                    return;
+                }
+                else
+                {
+
+                    foreach (Control c in gbxCategorieTarif.Controls)
                     {
+                        if (c is TextBox tbxCategorie)
+                        {
 
-                        TextBox txt = (TextBox)c;
+                            TextBox txt = (TextBox)c;
 
-                        string tableau;
-                        tableau = (txt.Tag).ToString(); 
-                        tableau.Split(';');
+                            string liste;
+                            liste = (txt.Tag).ToString();
+                            liste.Split(';');
 
-                        string lettreCategorie = tableau[0].ToString();
-                        int noType = int.Parse(tableau[2].ToString());
-                        double tarif = double.Parse(txt.Text);
+                            string lettreCategorie = liste[0].ToString();
+                            int noType = int.Parse(liste[2].ToString());
+                            double tarif = double.Parse(txt.Text);
 
-                        Periode accesNoPeriode = (Periode)cmbPeriodeTarif.SelectedItem;
-                        Liaison accesNoLiaison = (Liaison)cmbLiaisonTarif.SelectedItem;
+                            Periode accesNoPeriode = (Periode)cmbPeriodeTarif.SelectedItem;
+                            Liaison accesNoLiaison = (Liaison)cmbLiaisonTarif.SelectedItem;
 
-                        requete = "Insert into tarifer(noperiode, lettrecategorie, notype, noliaison, tarif) values (@noperiode, @lettrecategorie, @notype, @noliaison, @tarif)";
-                        var maCde = new MySqlCommand(requete, maCnx);
-                        maCde.Parameters.AddWithValue("@noperiode", accesNoPeriode.GetNoperiode());
-                        maCde.Parameters.AddWithValue("@lettrecategorie", lettreCategorie);
-                        maCde.Parameters.AddWithValue("@notype", noType);
-                        maCde.Parameters.AddWithValue("@noliaison", accesNoLiaison.GetNoLiaison());
-                        maCde.Parameters.AddWithValue("@tarif", tarif);
-                        maCde.ExecuteNonQuery();
+                            requete = "Insert into tarifer(noperiode, lettrecategorie, notype, noliaison, tarif) values (@noperiode, @lettrecategorie, @notype, @noliaison, @tarif)";
+                            var maCde = new MySqlCommand(requete, maCnx);
+                            maCde.Parameters.AddWithValue("@noperiode", accesNoPeriode.GetNoperiode());
+                            maCde.Parameters.AddWithValue("@lettrecategorie", lettreCategorie);
+                            maCde.Parameters.AddWithValue("@notype", noType);
+                            maCde.Parameters.AddWithValue("@noliaison", accesNoLiaison.GetNoLiaison());
+                            maCde.Parameters.AddWithValue("@tarif", tarif);
+                            maCde.ExecuteNonQuery();
 
-                        MessageBox.Show("Votre tarif a été ajouté avec succès");
+                            MessageBox.Show("Votre tarif a été ajouté avec succès");
+                        }
                     }
                 }
             }

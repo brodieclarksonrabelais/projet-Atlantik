@@ -47,10 +47,10 @@ namespace projetAtlantik_Brodie
                     string cleHMAC = jeuEnregistrements["CLEHMAC_PB"].ToString();
                     int enProduction = Convert.ToInt32(jeuEnregistrements["ENPRODUCTION"]);
                     string mel = jeuEnregistrements["MELSITE"].ToString();
-                    
+
                     tbxSite.Text = site;
                     tbxRang.Text = rang;
-                    tbxID.Text = identifiant;   
+                    tbxID.Text = identifiant;
                     tbxCleHMAC.Text = cleHMAC;
                     tbxMel.Text = mel;
                 }
