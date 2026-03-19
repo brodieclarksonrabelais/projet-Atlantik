@@ -156,9 +156,6 @@ namespace projetAtlantik_Brodie
 
                 while (jeuEnregistrements.Read())
                 {
-                    string lettreCategorie = jeuEnregistrements["lettrecategorie"].ToString();
-                    int noType = Convert.ToInt32(jeuEnregistrements["notype"]);
-                    string libelle = jeuEnregistrements["libelle"].ToString();
                     int quantiteReservee = Convert.ToInt32(jeuEnregistrements["quantitereservee"]);
                     montantTotal = Convert.ToDouble(jeuEnregistrements["montanttotal"]);
                     modeReglement = jeuEnregistrements["modereglement"].ToString();
@@ -176,7 +173,7 @@ namespace projetAtlantik_Brodie
 
                 jeuEnregistrements.Close();
 
-                lblMontantResultat.Text = montantTotal.ToString() + " €";
+                lblMontantResultat.Text = montantTotal.ToString();
                 lblReglementResultat.Text = modeReglement;
             }
             catch (Exception ex)

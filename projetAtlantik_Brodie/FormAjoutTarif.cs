@@ -81,12 +81,13 @@ namespace projetAtlantik_Brodie
                     gbxCategorieTarif.Controls.Add(lblCategorie);
 
                     tbxCategorie = new TextBox();
-                    var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
-                    var resultatTest = objetRegEx.Match(tbxCategorie.Text);
+                    //var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
+                    //var resultatTest = objetRegEx.Match(tbxCategorie.Text);
 
                     tbxCategorie.Tag = lettreCategorie + ";" + noType; 
                     tbxCategorie.Location = new Point(200, i * 15);
-                    tbxCategorie.TextChanged += tbxCategorie_TextChanged;
+                    //tbxCategorie.TextChanged += tbxCategorie_TextChanged;
+                    tbxCategorie.Validating += tbxCategorie_Validating;
                     gbxCategorieTarif.Controls.Add(tbxCategorie);
 
                 }
@@ -166,7 +167,6 @@ namespace projetAtlantik_Brodie
                 if (cmbLiaisonTarif.SelectedItem == null || cmbPeriodeTarif.SelectedItem == null || lbxSecteurTarif == null)
                 {
                     MessageBox.Show("Sélectionnez un secteur, une période et une liaison");
-                    return;
                 }
                 else
                 {
@@ -197,10 +197,9 @@ namespace projetAtlantik_Brodie
                             maCde.Parameters.AddWithValue("@noliaison", accesNoLiaison.GetNoLiaison());
                             maCde.Parameters.AddWithValue("@tarif", tarif);
                             maCde.ExecuteNonQuery();
-
-                            MessageBox.Show("Votre tarif a été ajouté avec succès");
                         }
                     }
+                    MessageBox.Show("Votre tarif a été ajouté avec succès");
                 }
             }
             catch (Exception ex)
@@ -235,6 +234,21 @@ namespace projetAtlantik_Brodie
                 tbx.BackColor = Color.White;
                 btnAjoutTarif.Enabled = true;
             }
+        }
+
+        private void tbxCategorie_Validating(object sender, EventArgs e)
+        {
+            TextBox tbx = (TextBox)sender;
+            var objetRegEx = new Regex("^[0-9]*$");
+            var resultatTest = objetRegEx.Match(tbx.Text);
+
+            if (!resultatTest.Success)
+            {
+                MessageBox.Show("Format incorrect");
+                tbx.BackColor = Color.Red;
+            }
+            else tbx.BackColor = Color.Green;
+
         }
 
         private void gbxCategorieTarif_Validating(object sender, CancelEventArgs e)

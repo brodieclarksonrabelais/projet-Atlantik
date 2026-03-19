@@ -73,35 +73,42 @@ namespace projetAtlantik_Brodie
             maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             MySqlCommand maCde;
 
-            try
+            if (tbxMel.Text == null || tbxID.Text == null || tbxCleHMAC.Text == null || tbxRang.Text == null || tbxSite.Text == null)
             {
-                maCnx.Open();
-                string site = tbxSite.Text;
-                string rang = tbxRang.Text;
-                string identifiant = tbxID.Text;
-                string cleHMAC = tbxCleHMAC.Text;
-                string mel = tbxMel.Text;
-                int enProduction = Convert.ToInt32(cbxEnProduction.Checked);
-
-                requete = "Update parametres set SITE_PB = @SITE_PB, RANG_PB = @RANG_PB, IDENTIFIANT_PB = @IDENTIFIANT_PB, CLEHMAC_PB = @CLEHMAC_PB, ENPRODUCTION = @ENPRODUCTION , MELSITE = @MELSITE";
-                maCde = new MySqlCommand(requete, maCnx);
-                maCde.Parameters.AddWithValue("@SITE_PB", site);
-                maCde.Parameters.AddWithValue("@RANG_PB", rang);
-                maCde.Parameters.AddWithValue("@IDENTIFIANT_PB", identifiant);
-                maCde.Parameters.AddWithValue("@CLEHMAC_PB", cleHMAC);
-                maCde.Parameters.AddWithValue("@ENPRODUCTION", enProduction);
-                maCde.Parameters.AddWithValue("@MELSITE", mel);
-                maCde.ExecuteNonQuery();
-
-                MessageBox.Show("Vos paramètres ont été modifiés avec succès");
+                MessageBox.Show("Veuillez remplir tout les champs");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                maCnx.Close();
+                try
+                {
+                    maCnx.Open();
+                    string site = tbxSite.Text;
+                    string rang = tbxRang.Text;
+                    string identifiant = tbxID.Text;
+                    string cleHMAC = tbxCleHMAC.Text;
+                    string mel = tbxMel.Text;
+                    int enProduction = Convert.ToInt32(cbxEnProduction.Checked);
+
+                    requete = "Update parametres set SITE_PB = @SITE_PB, RANG_PB = @RANG_PB, IDENTIFIANT_PB = @IDENTIFIANT_PB, CLEHMAC_PB = @CLEHMAC_PB, ENPRODUCTION = @ENPRODUCTION , MELSITE = @MELSITE";
+                    maCde = new MySqlCommand(requete, maCnx);
+                    maCde.Parameters.AddWithValue("@SITE_PB", site);
+                    maCde.Parameters.AddWithValue("@RANG_PB", rang);
+                    maCde.Parameters.AddWithValue("@IDENTIFIANT_PB", identifiant);
+                    maCde.Parameters.AddWithValue("@CLEHMAC_PB", cleHMAC);
+                    maCde.Parameters.AddWithValue("@ENPRODUCTION", enProduction);
+                    maCde.Parameters.AddWithValue("@MELSITE", mel);
+                    maCde.ExecuteNonQuery();
+
+                    MessageBox.Show("Vos paramètres ont été modifiés avec succès");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    maCnx.Close();
+                }
             }
         }
 
@@ -143,6 +150,18 @@ namespace projetAtlantik_Brodie
             {
                 tbx.BackColor = Color.White;
                 btnModifParametres.Enabled = true;
+            }
+        }
+
+        private void tbxMel_Validated(object sender, EventArgs e)
+        {
+            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
+            var resultatTest = objetRegEx.Match(tbxMel.Text);
+
+            if (!resultatTest.Success)
+            {
+                MessageBox.Show("Format incorrect");
+                tbxMel.BackColor = Color.Red;
             }
         }
     }

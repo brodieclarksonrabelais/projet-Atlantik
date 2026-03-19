@@ -93,11 +93,11 @@ namespace projetAtlantik_Brodie
 
                         TextBox txt = (TextBox)c;
 
-                        string tableau;
-                        tableau = (txt.Tag).ToString();
-                        tableau.Split(';');
+                        string categorie;
+                        categorie = (txt.Tag).ToString();
+                        categorie.Split(';');
 
-                        string lettreCategorie = tableau[0].ToString();
+                        string lettreCategorie = categorie[0].ToString();
                         int capaciteMax = int.Parse(txt.Text);
 
                         requete = "Insert into contenir(lettrecategorie, nobateau, capacitemax) values (@lettrecategorie, @nobateau, @capacitemax)";
@@ -165,7 +165,7 @@ namespace projetAtlantik_Brodie
             {
                 MessageBox.Show("Format incorrect");
                 tbxNomBateau.BackColor = Color.Red;
-
+                e.Cancel = true;
             }
         }
     }

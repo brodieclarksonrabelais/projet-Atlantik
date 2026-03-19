@@ -23,22 +23,21 @@ namespace projetAtlantik_Brodie
 
         private void btnAjoutLiaison_Click(object sender, EventArgs e)
         {
-            MySqlConnection maCnx;
-            maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306;password=");
-
-            try
+            MySqlConnection maCnx4;
+            maCnx4 = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306;password=");
+            if (tbxDistance.Text == null)
             {
-                if(lbxSecteurs.SelectedItems == null || cmbDepart.SelectedItem == null || cmbArrivee.SelectedItem == null)
-                {
-                    MessageBox.Show("Sélectionnez un secteur, une date de départ et une date d'arrivée");
-                } 
-                else
+                MessageBox.Show("Entrez un nom de secteur");
+            }
+            else
+            {
+                try
                 {
                     double distance = double.Parse(tbxDistance.Text);
                     string requete;
-                    maCnx.Open();
+                    maCnx4.Open();
                     requete = "insert into liaison(NOPORT_DEPART,NOSECTEUR, NOPORT_ARRIVEE,DISTANCE) values(@noportdepart,@nosecteur,@noportarrivee,@distance)";
-                    var maCde4 = new MySqlCommand(requete, maCnx);
+                    var maCde4 = new MySqlCommand(requete, maCnx4);
                     maCde4.Parameters.AddWithValue("@nosecteur", ((Secteurs)lbxSecteurs.SelectedItem).GetNosecteur());
                     maCde4.Parameters.AddWithValue("@noportdepart", ((Ports)cmbDepart.SelectedItem).GetNoPorts());
                     maCde4.Parameters.AddWithValue("@noportarrivee", ((Ports)cmbArrivee.SelectedItem).GetNoPorts());
@@ -47,14 +46,14 @@ namespace projetAtlantik_Brodie
 
                     MessageBox.Show("La liaison à été ajouté avec succès.");
                 }
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                maCnx.Close();
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    maCnx4.Close();
+                }
             }
         }
 
@@ -84,7 +83,6 @@ namespace projetAtlantik_Brodie
 
                 int noPortsDepart;
                 string nomPortsDepart;
-                maCo.Open();
                 requête = "Select * from port";
                 maCde2 = new MySqlCommand(requête, maCo);
                 jeuEnregistrements = maCde2.ExecuteReader();
@@ -98,7 +96,6 @@ namespace projetAtlantik_Brodie
 
                 int noPortsArrivee;
                 string nomPortsArrivee;
-                maCo.Open();
                 requête = "Select * from port";
                 maCde3 = new MySqlCommand(requête, maCo);
                 jeuEnregistrements = maCde3.ExecuteReader();
@@ -146,7 +143,7 @@ namespace projetAtlantik_Brodie
             {
                 MessageBox.Show("Format incorrect");
                 tbxDistance.BackColor = Color.Red;
-
+                e.Cancel = true;
             }
         }
     }

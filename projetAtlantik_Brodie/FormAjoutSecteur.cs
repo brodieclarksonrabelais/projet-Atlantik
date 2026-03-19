@@ -26,26 +26,32 @@ namespace projetAtlantik_Brodie
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306" );
             string requête;
             MySqlCommand maCde;
-
-            try
+            if (tbxAjoutSecteur.Text == null)
             {
-                maCo.Open();
-                string nom = tbxAjoutSecteur.Text;
-
-                requête = "Insert into secteur (nom) values (@nom)";
-                maCde = new MySqlCommand(requête, maCo);
-                maCde.Parameters.AddWithValue("@nom", nom);
-
-                int nb = maCde.ExecuteNonQuery();
-                MessageBox.Show("Le secteur a été ajouté avec succès.");
+                MessageBox.Show("Entrez un nom de secteur");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                maCo.Close();
+                try
+                {
+                    maCo.Open();
+                    string nom = tbxAjoutSecteur.Text;
+
+                    requête = "Insert into secteur (nom) values (@nom)";
+                    maCde = new MySqlCommand(requête, maCo);
+                    maCde.Parameters.AddWithValue("@nom", nom);
+
+                    int nb = maCde.ExecuteNonQuery();
+                    MessageBox.Show("Le secteur a été ajouté avec succès.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    maCo.Close();
+                }
             }
         }
 
@@ -63,7 +69,8 @@ namespace projetAtlantik_Brodie
             {
                 MessageBox.Show("Format incorrect");
                 tbxAjoutSecteur.BackColor = Color.Red;
-                
+                e.Cancel = true;
+
             }
         }
 

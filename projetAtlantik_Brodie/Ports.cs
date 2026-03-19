@@ -24,7 +24,7 @@ namespace projetAtlantik_Brodie
 
         public override string ToString()
         {
-            return nomPort;
+            return noPort.ToString()+ " - " + nomPort;
         }
     }
 }
