@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAjoutSecteur = new System.Windows.Forms.Button();
             this.tbxAjoutSecteur = new System.Windows.Forms.TextBox();
             this.lblAjoutSecteur = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAjoutSecteur
@@ -62,6 +65,10 @@
             this.lblAjoutSecteur.Tag = "";
             this.lblAjoutSecteur.Text = "Saisissez le secteur à ajouter :";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FormAjoutSecteur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -73,6 +80,7 @@
             this.Name = "FormAjoutSecteur";
             this.Text = "FormAjoutSecteur";
             this.Load += new System.EventHandler(this.FormAjoutSecteur_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -83,5 +91,6 @@
         private System.Windows.Forms.Button btnAjoutSecteur;
         private System.Windows.Forms.TextBox tbxAjoutSecteur;
         private System.Windows.Forms.Label lblAjoutSecteur;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

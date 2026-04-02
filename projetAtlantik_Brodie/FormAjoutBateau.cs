@@ -54,7 +54,7 @@ namespace projetAtlantik_Brodie
                     tbxCategorie = new TextBox();
                     tbxCategorie.Tag = lettreCategorie + ";";
                     tbxCategorie.Location = new Point(200, i * 15);
-                    tbxCategorie.TextChanged += tbxCapacite_TextChanged;
+                    tbxCategorie.Validating += tbxQuantite_Validating;
                     gbxCapacites.Controls.Add(tbxCategorie);
                 }
                 jeuEnregistrements.Close();
@@ -75,85 +75,65 @@ namespace projetAtlantik_Brodie
             string requete;
             MySqlConnection maCnx;
             maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
-
-            try
+            if (tbxNomBateau.Text == "")
             {
-                maCnx.Open();
-                string nom = tbxNomBateau.Text;
-                requete = "Insert into bateau(nom) values (@nom)";
-                var maCde = new MySqlCommand(requete, maCnx);
-                maCde.Parameters.AddWithValue("@nom", nom);
-                maCde.ExecuteNonQuery();
-                int noBateau = (int)maCde.LastInsertedId;
-
-                foreach (Control c in gbxCapacites.Controls)
+                MessageBox.Show("Entrez un nom de secteur");
+            }
+            else
+            {
+                try
                 {
-                    if (c is TextBox tbxCategorie)
+                    maCnx.Open();
+                    string nom = tbxNomBateau.Text;
+                    requete = "Insert into bateau(nom) values (@nom)";
+                    var maCde = new MySqlCommand(requete, maCnx);
+                    maCde.Parameters.AddWithValue("@nom", nom);
+                    maCde.ExecuteNonQuery();
+                    int noBateau = (int)maCde.LastInsertedId;
+
+                    foreach (Control c in gbxCapacites.Controls)
                     {
+                        if (c is TextBox tbxCategorie)
+                        {
 
-                        TextBox txt = (TextBox)c;
+                            TextBox txt = (TextBox)c;
 
-                        string categorie;
-                        categorie = (txt.Tag).ToString();
-                        categorie.Split(';');
+                            string categorie;
+                            categorie = (txt.Tag).ToString();
+                            categorie.Split(';');
 
-                        string lettreCategorie = categorie[0].ToString();
-                        int capaciteMax = int.Parse(txt.Text);
+                            string lettreCategorie = categorie[0].ToString();
+                            int capaciteMax = int.Parse(txt.Text);
 
-                        requete = "Insert into contenir(lettrecategorie, nobateau, capacitemax) values (@lettrecategorie, @nobateau, @capacitemax)";
-                        var maCde2 = new MySqlCommand(requete, maCnx);
-                        maCde2.Parameters.AddWithValue("@lettrecategorie", lettreCategorie);
-                        maCde2.Parameters.AddWithValue("@nobateau", noBateau);
-                        maCde2.Parameters.AddWithValue("@capacitemax", capaciteMax);
-                        maCde2.ExecuteNonQuery();
+                            requete = "Insert into contenir(lettrecategorie, nobateau, capacitemax) values (@lettrecategorie, @nobateau, @capacitemax)";
+                            var maCde2 = new MySqlCommand(requete, maCnx);
+                            maCde2.Parameters.AddWithValue("@lettrecategorie", lettreCategorie);
+                            maCde2.Parameters.AddWithValue("@nobateau", noBateau);
+                            maCde2.Parameters.AddWithValue("@capacitemax", capaciteMax);
+                            maCde2.ExecuteNonQuery();
+                        }
                     }
+                    MessageBox.Show("Votre bateau a été ajouté avec succès");
                 }
-                MessageBox.Show("Votre bateau a été ajouté avec succès");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                maCnx.Close();
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    maCnx.Close();
+                }
             }
         }
 
         private void tbxCapacite_TextChanged(object sender, EventArgs e)
         {
-            TextBox tbx = (TextBox)sender;
-            var objetRegEx = new Regex("^[0-9]*$");
-            var resultatTest = objetRegEx.Match(tbx.Text);
-
-            if (!resultatTest.Success)
-            {
-                tbx.BackColor = Color.Red;
-                btnAjoutBateau.Enabled = false;
-            }
-            else
-            {
-                tbx.BackColor = Color.White;
-                btnAjoutBateau.Enabled = true;
-            }
+            
         }
 
         private void tbxNomBateau_TextChanged(object sender, EventArgs e)
         {
-            TextBox tbx = (TextBox)sender;
-            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
-            var resultatTest = objetRegEx.Match(tbx.Text);
-
-            if (!resultatTest.Success)
-            {
-                tbx.BackColor = Color.Red;
-                btnAjoutBateau.Enabled = false;
-            }
-            else
-            {
-                tbx.BackColor = Color.White;
-                btnAjoutBateau.Enabled = true;
-            }
+            
         }
 
         private void tbxNomBateau_Validating(object sender, CancelEventArgs e)
@@ -163,9 +143,33 @@ namespace projetAtlantik_Brodie
 
             if (!resultatTest.Success)
             {
-                MessageBox.Show("Format incorrect");
                 tbxNomBateau.BackColor = Color.Red;
                 e.Cancel = true;
+                errorProviderBateau.SetError(tbxNomBateau, "Saisir un bateau valide ! ");
+            }
+            else
+            {
+                tbxNomBateau.BackColor = Color.Green;
+                errorProviderBateau.Clear();
+            }
+        }
+
+        private void tbxQuantite_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox tbx = (TextBox)sender;
+            var objetRegEx = new Regex("^[0-9]*$");
+            var resultatTest = objetRegEx.Match(tbx.Text);
+
+            if (!resultatTest.Success)
+            {
+                tbx.BackColor = Color.Red;
+                e.Cancel = true;
+                errorProviderTarif.SetError(tbx, "Saisir des quantités valides ! ");
+            }
+            else
+            {
+                tbx.BackColor = Color.Green;
+                errorProviderTarif.Clear();
             }
         }
     }

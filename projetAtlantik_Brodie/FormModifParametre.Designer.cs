@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblSite = new System.Windows.Forms.Label();
             this.lblRang = new System.Windows.Forms.Label();
             this.lblid = new System.Windows.Forms.Label();
@@ -40,6 +41,8 @@
             this.lblMelSite = new System.Windows.Forms.Label();
             this.btnModifParametres = new System.Windows.Forms.Button();
             this.cbxEnProduction = new System.Windows.Forms.CheckBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSite
@@ -160,6 +163,10 @@
             this.cbxEnProduction.UseVisualStyleBackColor = true;
             this.cbxEnProduction.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FormModifParametre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -181,6 +188,7 @@
             this.Name = "FormModifParametre";
             this.Text = "FormModifParametre";
             this.Load += new System.EventHandler(this.FormModifParametre_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,5 +208,6 @@
         private System.Windows.Forms.Label lblMelSite;
         private System.Windows.Forms.Button btnModifParametres;
         private System.Windows.Forms.CheckBox cbxEnProduction;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -17,6 +17,11 @@ namespace projetAtlantik_Brodie
             this.dateHeure = dateHeureDepart;
         }
 
+        public DateTime GetDateHeure()
+        {
+            return dateHeure;
+        }
+
         public int GetNoTraverse()
         {
             return noTraverse;

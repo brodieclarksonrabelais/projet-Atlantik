@@ -220,35 +220,27 @@ namespace projetAtlantik_Brodie
 
         private void tbxCategorie_TextChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void tbxCategorie_Validating(object sender, EventArgs e)
+        {
             TextBox tbx = (TextBox)sender;
-            var objetRegEx = new Regex("^[0-9]*$");
+            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
             var resultatTest = objetRegEx.Match(tbx.Text);
 
             if (!resultatTest.Success)
             {
                 tbx.BackColor = Color.Red;
                 btnAjoutTarif.Enabled = false;
+                errorProvider1.SetError(tbx, "Saisir des tarifs valides ! ");
             }
             else
             {
-                tbx.BackColor = Color.White;
+                tbx.BackColor = Color.Green;
                 btnAjoutTarif.Enabled = true;
+                errorProvider1.Clear();
             }
-        }
-
-        private void tbxCategorie_Validating(object sender, EventArgs e)
-        {
-            TextBox tbx = (TextBox)sender;
-            var objetRegEx = new Regex("^[0-9]*$");
-            var resultatTest = objetRegEx.Match(tbx.Text);
-
-            if (!resultatTest.Success)
-            {
-                MessageBox.Show("Format incorrect");
-                tbx.BackColor = Color.Red;
-            }
-            else tbx.BackColor = Color.Green;
-
         }
 
         private void gbxCategorieTarif_Validating(object sender, CancelEventArgs e)

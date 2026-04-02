@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblNomBateauListe = new System.Windows.Forms.Label();
             this.cmbNomBateau = new System.Windows.Forms.ComboBox();
             this.gbxCapaciteMaxModif = new System.Windows.Forms.GroupBox();
             this.btnModifierBateau = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNomBateauListe
@@ -71,6 +74,10 @@
             this.btnModifierBateau.UseVisualStyleBackColor = true;
             this.btnModifierBateau.Click += new System.EventHandler(this.btnModifierBateau_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FormModifBateau
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -83,6 +90,7 @@
             this.Name = "FormModifBateau";
             this.Text = "FormModifBateau";
             this.Load += new System.EventHandler(this.FormModifBateau_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,5 +102,6 @@
         private System.Windows.Forms.ComboBox cmbNomBateau;
         private System.Windows.Forms.GroupBox gbxCapaciteMaxModif;
         private System.Windows.Forms.Button btnModifierBateau;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

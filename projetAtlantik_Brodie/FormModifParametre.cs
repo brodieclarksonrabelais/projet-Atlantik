@@ -31,38 +31,45 @@ namespace projetAtlantik_Brodie
             maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             MySqlCommand maCde;
 
-            try
+            if (tbxMel.Text == "")
             {
-                maCnx.Open();
-
-                requete = "Select * from parametres";
-                maCde = new MySqlCommand(requete, maCnx);
-                MySqlDataReader jeuEnregistrements;
-                jeuEnregistrements = maCde.ExecuteReader();
-                while (jeuEnregistrements.Read())
+                MessageBox.Show("Entrez un nom de secteur");
+            }
+            else
+            {
+                try
                 {
-                    string site = jeuEnregistrements["SITE_PB"].ToString();
-                    string rang = jeuEnregistrements["RANG_PB"].ToString();
-                    string identifiant = jeuEnregistrements["IDENTIFIANT_PB"].ToString();
-                    string cleHMAC = jeuEnregistrements["CLEHMAC_PB"].ToString();
-                    int enProduction = Convert.ToInt32(jeuEnregistrements["ENPRODUCTION"]);
-                    string mel = jeuEnregistrements["MELSITE"].ToString();
+                    maCnx.Open();
 
-                    tbxSite.Text = site;
-                    tbxRang.Text = rang;
-                    tbxID.Text = identifiant;
-                    tbxCleHMAC.Text = cleHMAC;
-                    tbxMel.Text = mel;
+                    requete = "Select * from parametres";
+                    maCde = new MySqlCommand(requete, maCnx);
+                    MySqlDataReader jeuEnregistrements;
+                    jeuEnregistrements = maCde.ExecuteReader();
+                    while (jeuEnregistrements.Read())
+                    {
+                        string site = jeuEnregistrements["SITE_PB"].ToString();
+                        string rang = jeuEnregistrements["RANG_PB"].ToString();
+                        string identifiant = jeuEnregistrements["IDENTIFIANT_PB"].ToString();
+                        string cleHMAC = jeuEnregistrements["CLEHMAC_PB"].ToString();
+                        int enProduction = Convert.ToInt32(jeuEnregistrements["ENPRODUCTION"]);
+                        string mel = jeuEnregistrements["MELSITE"].ToString();
+
+                        tbxSite.Text = site;
+                        tbxRang.Text = rang;
+                        tbxID.Text = identifiant;
+                        tbxCleHMAC.Text = cleHMAC;
+                        tbxMel.Text = mel;
+                    }
+                    jeuEnregistrements.Close();
                 }
-                jeuEnregistrements.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                maCnx.Close();
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    maCnx.Close();
+                }
             }
         }
 
@@ -73,7 +80,7 @@ namespace projetAtlantik_Brodie
             maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             MySqlCommand maCde;
 
-            if (tbxMel.Text == null || tbxID.Text == null || tbxCleHMAC.Text == null || tbxRang.Text == null || tbxSite.Text == null)
+            if (tbxMel.Text == "" || tbxID.Text == "" || tbxCleHMAC.Text == "" || tbxRang.Text == "" || tbxSite.Text == "")
             {
                 MessageBox.Show("Veuillez remplir tout les champs");
             }
@@ -124,45 +131,30 @@ namespace projetAtlantik_Brodie
 
         private void tbxMel_Validating(object sender, CancelEventArgs e)
         {
-            var objetRegEx = new Regex(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$");
-            var resultatTest = objetRegEx.Match(tbxMel.Text);
-
-            if (!resultatTest.Success)
-            {
-                MessageBox.Show("Format incorrect");
-                tbxMel.BackColor = Color.Red;
-
-            }
-        }
-
-        private void tbxMel_TextChanged(object sender, EventArgs e)
-        {
-            TextBox tbx = (TextBox)sender;
-            var objetRegEx = new Regex(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$");
-            var resultatTest = objetRegEx.Match(tbx.Text);
-
-            if (!resultatTest.Success)
-            {
-                tbx.BackColor = Color.Red;
-                btnModifParametres.Enabled = false;
-            }
-            else
-            {
-                tbx.BackColor = Color.White;
-                btnModifParametres.Enabled = true;
-            }
-        }
-
-        private void tbxMel_Validated(object sender, EventArgs e)
-        {
             var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
             var resultatTest = objetRegEx.Match(tbxMel.Text);
 
             if (!resultatTest.Success)
             {
-                MessageBox.Show("Format incorrect");
                 tbxMel.BackColor = Color.Red;
+                e.Cancel = true;
+                errorProvider1.SetError(tbxMel, "Saisir un mel valide ! ");
             }
+            else
+            {
+                tbxMel.BackColor = Color.Green;
+                errorProvider1.Clear();
+            }
+        }
+
+        private void tbxMel_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbxMel_Validated(object sender, EventArgs e)
+        {
+            
         }
     }
 }

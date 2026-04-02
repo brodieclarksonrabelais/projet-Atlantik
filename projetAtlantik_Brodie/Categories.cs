@@ -17,6 +17,11 @@ namespace projetAtlantik_Brodie
             this.libelle = libelle;
         }
 
+        public string GetLettreCategorie()
+        { 
+            return lettrecategorie;
+        }
+
         public override string ToString()
         {
             return lettrecategorie + " " + libelle;

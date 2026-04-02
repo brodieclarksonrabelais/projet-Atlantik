@@ -30,9 +30,9 @@ namespace projetAtlantik_Brodie
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             string requête;
             MySqlCommand maCde;
-            if (tbxAjoutPort.Text == null)
+            if (tbxAjoutPort.Text == "")
             {
-                MessageBox.Show("Entrez un nom de secteur");
+                MessageBox.Show("Entrez un nom de port");
             }
             else
             {
@@ -61,19 +61,7 @@ namespace projetAtlantik_Brodie
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
-            var resultatTest = objetRegEx.Match(tbxAjoutPort.Text);
 
-            if (!resultatTest.Success)
-            {
-                tbxAjoutPort.BackColor = Color.Red;
-                btnAjoutPort.Enabled = false;
-            }
-            else
-            {
-                tbxAjoutPort.BackColor = Color.White;
-                btnAjoutPort.Enabled = true;
-            }
         }
 
         private void tbxAjoutPort_Validating(object sender, CancelEventArgs e)
@@ -83,10 +71,16 @@ namespace projetAtlantik_Brodie
 
             if (!resultatTest.Success)
             {
-                MessageBox.Show("Format incorrect");
                 tbxAjoutPort.BackColor = Color.Red;
                 e.Cancel = true;
+                errorProvider1.SetError(tbxAjoutPort, "Saisir un port valide ! ");
             }
+            else
+            {
+                tbxAjoutPort.BackColor = Color.Green;
+                errorProvider1.Clear();
+            }
+        
         }
     }
 }

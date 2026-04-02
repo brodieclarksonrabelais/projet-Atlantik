@@ -266,8 +266,8 @@ namespace projetAtlantik_Brodie
             maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             string requete;
             MySqlCommand maCde;
-
-
+            lvAffichageTraversee.Items.Clear();
+            
             maCnx.Open();
             try
             {
@@ -280,7 +280,6 @@ namespace projetAtlantik_Brodie
                 {
                     int noLiason = ((Liaison)cmbLiaisonTraversee.SelectedItem).GetNoLiaison();
                     DateTime dateDepart = DateTime.Parse(dateTraversee.Value.ToString());
-                    var tabItem = new string[6];
                     List<Traversees> Lestraversees = new List<Traversees>(GetLesTraverseesBateaux(noLiason, dateDepart));
                     List<Categories> Lescategories = new List<Categories>(GetLesCategories());
 
@@ -295,20 +294,33 @@ namespace projetAtlantik_Brodie
                     lvAffichageTraversee.GridLines = true;
                     lvAffichageTraversee.FullRowSelect = true;
 
+                    string nomBateau = "";
+
                     while (jeuEnregistrements.Read())
                     {
-                        int noTraverse = (int)jeuEnregistrements["notraversee"];
-                        string heure = (string)jeuEnregistrements["heure"];
-                        string nomBateau = (string)jeuEnregistrements["nom"];
+                        nomBateau = (string)jeuEnregistrements["nom"];
+                    }
+                    jeuEnregistrements.Close();
 
-                        tabItem[0] = noTraverse.ToString();
-                        tabItem[1] = heure;
+                    foreach (Traversees t in Lestraversees)
+                    {
+                        var tabItem = new string[6];
+
+                        tabItem[0] = t.GetNoTraverse().ToString();
+                        tabItem[1] = t.GetDateHeure().ToString("HH:mm");
                         tabItem[2] = nomBateau;
-                        tabItem[3] = (GetCapaciteMaximale(noTraverse, "A") - GetQuantiteEnregistree(noTraverse, "A")).ToString();
-                        tabItem[4] = (GetCapaciteMaximale(noTraverse, "B") - GetQuantiteEnregistree(noTraverse, "B")).ToString();
-                        tabItem[5] = (GetCapaciteMaximale(noTraverse, "C") - GetQuantiteEnregistree(noTraverse, "C")).ToString();
 
-                        lvAffichageTraversee.Items.Add(new ListViewItem(tabItem));
+                        int i = 3;
+
+                        foreach (Categories c in Lescategories)
+                        {
+                            int capaciteDisponible = GetCapaciteMaximale(t.GetNoTraverse(), c.GetLettreCategorie()) - GetQuantiteEnregistree(t.GetNoTraverse(), c.GetLettreCategorie());
+
+                            tabItem[i] = capaciteDisponible.ToString();
+                            i++;
+                        }
+                        ListViewItem item = new ListViewItem(tabItem);
+                        lvAffichageTraversee.Items.Add((item));
                     }
                 }
             }

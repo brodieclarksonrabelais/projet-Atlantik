@@ -69,8 +69,7 @@ namespace projetAtlantik_Brodie
             maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             string requete;
             MySqlCommand maCde;
-
-
+            lvTableauReservation.Items.Clear();
             maCnx.Open();
             try
             {
@@ -119,70 +118,76 @@ namespace projetAtlantik_Brodie
 
         private void lvTableauReservation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MySqlConnection maCo;
-            maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
-            string requête;
-            MySqlCommand maCde, maCdeReservation;
-
-            try
+            if (lvTableauReservation.SelectedItems.Count != 0)
             {
-                maCo.Open();
-                int noClient = ((Client)cmbNomReservation.SelectedItem).GetNoClient();
-                int noReservation = 0;
-                requête = "Select noreservation from reservation where noclient = @noclient";
-                maCdeReservation = new MySqlCommand(requête, maCo);
-                maCdeReservation.Parameters.AddWithValue("@noclient", noClient);
-                MySqlDataReader jeuEnregistrements;
-                jeuEnregistrements = maCdeReservation.ExecuteReader();
+                MySqlConnection maCo;
+                maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
+                string requête;
+                MySqlCommand maCde;
+                gbxReservation.Controls.Clear();
 
-                while (jeuEnregistrements.Read())
+                try
                 {
-                    noReservation = Convert.ToInt32(jeuEnregistrements["noreservation"]);
+                    maCo.Open();
+                    int noReservation = Convert.ToInt32(lvTableauReservation.SelectedItems[0].Text);
+
+                    requête = "Select t.lettrecategorie, t.notype, libelle, e.quantitereservee, montanttotal, modereglement from type t inner join enregistrer e on (t.notype = e.notype) and (t.lettrecategorie = e.lettrecategorie) inner join reservation r on (e.noreservation = r.noreservation) where e.noreservation = @noreservation";
+                    maCde = new MySqlCommand(requête, maCo);
+                    maCde.Parameters.AddWithValue("@noreservation", noReservation);
+                    MySqlDataReader jeuEnregistrements;
+                    jeuEnregistrements = maCde.ExecuteReader();
+
+                    Label lblCategorie, lblReservation, lblMontant, lblModePayment, lblMontantReservation, lblModePaymentRservation;
+                    int i = 0;
+
+                    while (jeuEnregistrements.Read())
+                    {
+                        string lettreCategorie = jeuEnregistrements["lettrecategorie"].ToString();
+                        int noType = Convert.ToInt32(jeuEnregistrements["notype"]);
+                        string libelle = jeuEnregistrements["libelle"].ToString();
+
+                        i += 2;
+                        lblCategorie = new Label();
+                        lblCategorie.Text = lettreCategorie + noType.ToString() + " - " + libelle + " :";
+                        lblCategorie.Location = new Point(0, i * 15);
+                        gbxReservation.Controls.Add(lblCategorie);
+
+                        lblReservation = new Label();
+                        lblReservation.Text = jeuEnregistrements["quantitereservee"].ToString();
+                        lblReservation.Location = new Point(140, i * 15);
+                        gbxReservation.Controls.Add(lblReservation);
+
+                        lblMontant = new Label();
+                        lblMontant.Text = jeuEnregistrements["montanttotal"].ToString();
+                        lblMontant.Location = new Point(140, 230);
+                        gbxReservation.Controls.Add(lblMontant);
+
+                        lblModePayment = new Label();
+                        lblModePayment.Text = jeuEnregistrements["modereglement"].ToString();
+                        lblModePayment.Location = new Point(140, 260);
+                        gbxReservation.Controls.Add(lblModePayment);
+
+                        lblMontantReservation = new Label();
+                        lblMontantReservation.Text = "Montant total :";
+                        lblMontantReservation.Location = new Point(0, 230);
+                        gbxReservation.Controls.Add(lblMontantReservation);
+
+                        lblModePaymentRservation = new Label();
+                        lblModePaymentRservation.Text = "Mode de payment :";
+                        lblModePaymentRservation.Location = new Point(0, 260);
+                        gbxReservation.Controls.Add(lblModePaymentRservation);
+                    }
+                    jeuEnregistrements.Close();
+
                 }
-                jeuEnregistrements.Close();
-
-                requête = "SELECT * from enregistrer e " +
-                            "inner join type t on e.NOTYPE = t.NOTYPE " +
-                            "inner join reservation r on  e.NORESERVATION = r.NORESERVATION " +
-                            "where t.LETTRECATEGORIE= e.LETTRECATEGORIE and e.NOTYPE = t.NOTYPE " +
-                            "and e.NORESERVATION = @noreservation";
-                maCde = new MySqlCommand(requête, maCo);
-                maCde.Parameters.AddWithValue("@noreservation", noReservation);
-                jeuEnregistrements = maCde.ExecuteReader();
-
-                int i = 0;
-                double montantTotal = 0;
-                string modeReglement = "";
-
-                while (jeuEnregistrements.Read())
+                catch (Exception ex)
                 {
-                    int quantiteReservee = Convert.ToInt32(jeuEnregistrements["quantitereservee"]);
-                    montantTotal = Convert.ToDouble(jeuEnregistrements["montanttotal"]);
-                    modeReglement = jeuEnregistrements["modereglement"].ToString();
-
-                    Label[] labels =
-                        {
-                            lblMontantAdulte,
-                            lblMontantJunior,
-                            lblMontantEnfant,
-                            lblMontantVoitMoins4
-                        };
-                    labels[i].Text = quantiteReservee.ToString();
-                    i++;
+                    MessageBox.Show(ex.Message);
                 }
-
-                jeuEnregistrements.Close();
-
-                lblMontantResultat.Text = montantTotal.ToString();
-                lblReglementResultat.Text = modeReglement;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                maCo.Close();
+                finally
+                {
+                    maCo.Close();
+                }
             }
         }
 

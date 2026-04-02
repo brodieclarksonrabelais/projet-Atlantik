@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAjoutLiaison = new System.Windows.Forms.Button();
             this.lbxSecteurs = new System.Windows.Forms.ListBox();
             this.cmbDepart = new System.Windows.Forms.ComboBox();
@@ -37,6 +38,8 @@
             this.lblArrivee = new System.Windows.Forms.Label();
             this.lblDistance = new System.Windows.Forms.Label();
             this.tbxDistance = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAjoutLiaison
@@ -118,6 +121,10 @@
             this.tbxDistance.TabIndex = 8;
             this.tbxDistance.TextChanged += new System.EventHandler(this.tbxDistance_TextChanged);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FormAjoutLiaison
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -135,6 +142,7 @@
             this.Name = "FormAjoutLiaison";
             this.Text = "FormAjoutLiaison";
             this.Load += new System.EventHandler(this.FormAjoutLiaison_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,5 +159,6 @@
         private System.Windows.Forms.Label lblArrivee;
         private System.Windows.Forms.Label lblDistance;
         private System.Windows.Forms.TextBox tbxDistance;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

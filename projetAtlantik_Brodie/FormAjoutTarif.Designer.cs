@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbxSecteurTarif = new System.Windows.Forms.ListBox();
             this.lblSecteursTarif = new System.Windows.Forms.Label();
             this.cmbLiaisonTarif = new System.Windows.Forms.ComboBox();
@@ -37,7 +38,9 @@
             this.gbxCategorieTarif = new System.Windows.Forms.GroupBox();
             this.lblTarif = new System.Windows.Forms.Label();
             this.btnAjoutTarif = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.gbxCategorieTarif.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbxSecteurTarif
@@ -125,6 +128,10 @@
             this.btnAjoutTarif.UseVisualStyleBackColor = true;
             this.btnAjoutTarif.Click += new System.EventHandler(this.btnAjoutTarif_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FormAjoutTarif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,6 +150,7 @@
             this.Load += new System.EventHandler(this.FormAjoutTarif_Load);
             this.gbxCategorieTarif.ResumeLayout(false);
             this.gbxCategorieTarif.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,5 +167,6 @@
         private System.Windows.Forms.GroupBox gbxCategorieTarif;
         private System.Windows.Forms.Label lblTarif;
         private System.Windows.Forms.Button btnAjoutTarif;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

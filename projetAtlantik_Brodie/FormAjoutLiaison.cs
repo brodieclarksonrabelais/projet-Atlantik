@@ -25,9 +25,9 @@ namespace projetAtlantik_Brodie
         {
             MySqlConnection maCnx4;
             maCnx4 = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306;password=");
-            if (tbxDistance.Text == null)
+            if (tbxDistance.Text == "")
             {
-                MessageBox.Show("Entrez un nom de secteur");
+                MessageBox.Show("Entrez un nom de liaison");
             }
             else
             {
@@ -119,19 +119,7 @@ namespace projetAtlantik_Brodie
 
         private void tbxDistance_TextChanged(object sender, EventArgs e)
         {
-            var objetRegEx = new Regex("^[0-9]*$");
-            var resultatTest = objetRegEx.Match(tbxDistance.Text);
 
-            if (!resultatTest.Success)
-            {
-                tbxDistance.BackColor = Color.Red;
-                btnAjoutLiaison.Enabled = false;
-            }
-            else
-            {
-                tbxDistance.BackColor = Color.White;
-                btnAjoutLiaison.Enabled = true;
-            }
         }
 
         private void btnAjoutLiaison_Validating(object sender, CancelEventArgs e)
@@ -141,9 +129,14 @@ namespace projetAtlantik_Brodie
 
             if (!resultatTest.Success)
             {
-                MessageBox.Show("Format incorrect");
                 tbxDistance.BackColor = Color.Red;
                 e.Cancel = true;
+                errorProvider1.SetError(tbxDistance, "Saisir une distance valide ! ");
+            }
+            else
+            {
+                tbxDistance.BackColor = Color.Green;
+                errorProvider1.Clear();
             }
         }
     }

@@ -26,7 +26,8 @@ namespace projetAtlantik_Brodie
             maCo = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306" );
             string requête;
             MySqlCommand maCde;
-            if (tbxAjoutSecteur.Text == null)
+            
+            if (tbxAjoutSecteur.Text == "")
             {
                 MessageBox.Show("Entrez un nom de secteur");
             }
@@ -67,28 +68,20 @@ namespace projetAtlantik_Brodie
 
             if (!resultatTest.Success)
             {
-                MessageBox.Show("Format incorrect");
                 tbxAjoutSecteur.BackColor = Color.Red;
                 e.Cancel = true;
-
+                errorProvider1.SetError(tbxAjoutSecteur, "Saisir un secteur valide ! ");
+            }
+            else
+            {
+                tbxAjoutSecteur.BackColor = Color.Green;
+                errorProvider1.Clear();
             }
         }
 
         private void tbxAjoutSecteur_TextChanged(object sender, EventArgs e)
         {
-            var objetRegEx = new Regex("^[a-zA-Zéèêëçàâôùûïî]*$");
-            var resultatTest = objetRegEx.Match(tbxAjoutSecteur.Text);
-
-            if (!resultatTest.Success)
-            {
-                tbxAjoutSecteur.BackColor = Color.Red;
-                btnAjoutSecteur.Enabled = false;
-            }
-            else
-            {
-                tbxAjoutSecteur.BackColor = Color.White;
-                btnAjoutSecteur.Enabled = true;
-            }
+            
         }
     }
 }

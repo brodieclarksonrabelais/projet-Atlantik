@@ -71,7 +71,7 @@ namespace projetAtlantik_Brodie
                     tbxCategorie = new TextBox();
                     tbxCategorie.Tag = lettreCategorie;
                     tbxCategorie.Location = new Point(200, i * 15);
-                    tbxCategorie.TextChanged += tbxCapacite_TextChanged;
+                    tbxCategorie.Validating += tbxQuantite_Validating;
                     gbxCapaciteMaxModif.Controls.Add(tbxCategorie);
                 }
                 jeuEnregistrements.Close();
@@ -140,7 +140,8 @@ namespace projetAtlantik_Brodie
             MySqlConnection maCnx;
             maCnx = new MySqlConnection("server=localhost;user=root;database=atlantik2024;port=3306");
             MySqlCommand maCde;
-
+            
+            
             try
             {
                 maCnx.Open();
@@ -160,8 +161,7 @@ namespace projetAtlantik_Brodie
                     {
                         noBateau = Convert.ToInt32(jeuEnregistrements["nobateau"]);
                     }
-                    maCnx.Close();
-
+                    jeuEnregistrements.Close();
                     string nom = cmbNomBateau.Text;
 
                     foreach (Control c in gbxCapaciteMaxModif.Controls)
@@ -202,20 +202,26 @@ namespace projetAtlantik_Brodie
 
         private void tbxCapacite_TextChanged(object sender, EventArgs e)
         {
-            TextBox tbx = (TextBox)sender;
-            var objetRegEx = new Regex("^[0-9]*$");
-            var resultatTest = objetRegEx.Match(tbx.Text);
 
-            if (!resultatTest.Success)
+        }
+
+            private void tbxQuantite_Validating(object sender, CancelEventArgs e)
             {
-                tbx.BackColor = Color.Red;
-                btnModifierBateau.Enabled = false;
-            }
-            else
-            {
-                tbx.BackColor = Color.White;
-                btnModifierBateau.Enabled = true;
+                TextBox tbx = (TextBox)sender;
+                var objetRegEx = new Regex("^[0-9]*$");
+                var resultatTest = objetRegEx.Match(tbx.Text);
+
+                if (!resultatTest.Success)
+                {
+                    tbx.BackColor = Color.Red;
+                    e.Cancel = true;
+                    errorProvider1.SetError(tbx, "Saisir des quantités valides ! ");
+                }
+                else
+                {
+                    tbx.BackColor = Color.Green;
+                    errorProvider1.Clear();
+                }
             }
         }
     }
-}

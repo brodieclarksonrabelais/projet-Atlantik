@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblNomBateau = new System.Windows.Forms.Label();
             this.tbxNomBateau = new System.Windows.Forms.TextBox();
             this.btnAjoutBateau = new System.Windows.Forms.Button();
             this.gbxCapacites = new System.Windows.Forms.GroupBox();
+            this.errorProviderBateau = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderTarif = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderBateau)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTarif)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNomBateau
@@ -71,6 +76,14 @@
             this.gbxCapacites.TabStop = false;
             this.gbxCapacites.Text = "Capacités Maximales";
             // 
+            // errorProviderBateau
+            // 
+            this.errorProviderBateau.ContainerControl = this;
+            // 
+            // errorProviderTarif
+            // 
+            this.errorProviderTarif.ContainerControl = this;
+            // 
             // FormAjoutBateau
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -83,6 +96,8 @@
             this.Name = "FormAjoutBateau";
             this.Text = "FormAjoutBateau";
             this.Load += new System.EventHandler(this.FormAjoutBateau_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderBateau)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTarif)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,5 +109,7 @@
         private System.Windows.Forms.TextBox tbxNomBateau;
         private System.Windows.Forms.Button btnAjoutBateau;
         private System.Windows.Forms.GroupBox gbxCapacites;
+        private System.Windows.Forms.ErrorProvider errorProviderBateau;
+        private System.Windows.Forms.ErrorProvider errorProviderTarif;
     }
 }

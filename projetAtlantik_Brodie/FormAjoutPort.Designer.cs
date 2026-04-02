@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAjoutPort = new System.Windows.Forms.Button();
             this.tbxAjoutPort = new System.Windows.Forms.TextBox();
             this.lblAjoutPort = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAjoutPort
@@ -61,6 +64,10 @@
             this.lblAjoutPort.TabIndex = 2;
             this.lblAjoutPort.Text = "Saisissez Le nom du port :";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FormAjoutPort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -72,6 +79,7 @@
             this.Name = "FormAjoutPort";
             this.Text = "FormAjoutPort";
             this.Load += new System.EventHandler(this.FormAjoutPort_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,5 +90,6 @@
         private System.Windows.Forms.Button btnAjoutPort;
         private System.Windows.Forms.TextBox tbxAjoutPort;
         private System.Windows.Forms.Label lblAjoutPort;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
